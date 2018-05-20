@@ -138,7 +138,7 @@ public class ChatServlet extends HttpServlet {
       return;
     }
 
-    String messageContent = request.getParameter("message");
+    String messageContent = request.getParameter("message") + "<b> HELLO </b>";
 
     // this removes any HTML from the message content
     String cleanedMessageContent = Jsoup.clean(messageContent, Whitelist.none());
