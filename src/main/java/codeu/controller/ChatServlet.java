@@ -54,10 +54,14 @@ public class ChatServlet extends HttpServlet {
     setMessageStore(MessageStore.getInstance());
     setUserStore(UserStore.getInstance());
     //this sets the HTML tags that the user will be allowed to use
-    chatOk.addTags("strong","em","del","style","mark","sub","sup","cite","dfn","a","img","iframe");
-    chatOk.addAttributes("a","href")
+    chatOk.addTags("div","span","strong","em","del","style","mark","sub","sup","blockquote","cite","dfn","a","img","iframe","code","samp");
+    chatOk.addAttributes("div", "class", "id","style")
+          .addAttributes("span", "class", "id","style")
+          .addAttributes("style", "type","scoped")
+          .addAttributes("a","href")
           .addAttributes("img","align","src","width","height")
-          .addAttributes("iframe","align","src","width","height","allow","allowfullscreen");
+          .addAttributes("iframe","align","src","width","height","allow","allowfullscreen")
+          .addAttributes("blockquote","cite");
   }
 
   /**
