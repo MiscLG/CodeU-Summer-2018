@@ -54,7 +54,7 @@ public class ChatServlet extends HttpServlet {
     setMessageStore(MessageStore.getInstance());
     setUserStore(UserStore.getInstance());
     //this sets the HTML tags that the user will be allowed to use
-    chatOk.addTags("strong","em");
+    chatOk.addTags("strong","em","del","style","mark","sub","sup","a","cite","dfn");
   }
 
   /**
