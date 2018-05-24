@@ -59,7 +59,7 @@ public class ChatServlet extends HttpServlet {
           .addAttributes("span", "class", "id","style")
           .addAttributes("style", "type","scoped")
           .addAttributes("a","href")
-          .addAttributes("img","align","src","width","height")
+          .addAttributes("img","align","src","width","height","alt")
           .addAttributes("iframe","align","src","width","height","allow","allowfullscreen")
           .addAttributes("blockquote","cite");
   }
