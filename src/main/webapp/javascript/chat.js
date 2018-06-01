@@ -13,14 +13,19 @@
 * limitations under the License.
 */
 
+/*
+  the object tags contains the relevant information for every tag that will be
+  allowed on the chat application, the attributes bit is not necessary on this document
+  at the moment
+*/
 const defaultAttributes = ["class", "id", "style"];
 const tags = {
   div: {isButton: false, attributes: defaultAttributes},
   span: {isButton: false, attributes: defaultAttributes},
   style: {isButton: false, attributes: defaultAttributes},
   strong: {isButton: true, attributes: defaultAttributes, buttonText:"B"},
-  em: {isButton: true, attributes: defaultAttributes, buttonText:"B"},
-  del: {isButton: true, attributes: defaultAttributes, buttonText:"I"},
+  em: {isButton: true, attributes: defaultAttributes, buttonText:"I"},
+  del: {isButton: true, attributes: defaultAttributes, buttonText:"S"},
   mark: {isButton: true, attributes: defaultAttributes, buttonText:"M"},
   sub: {isButton: true, attributes: defaultAttributes,  buttonText:"x"},
   sup: {isButton: true, attributes: defaultAttributes, buttonText:"x"},
@@ -45,16 +50,18 @@ function scrollChat() {
   var chatDiv = document.getElementById('chat');
   chatDiv.scrollTop = chatDiv.scrollHeight;
 }
-// function to add html tags to chat once buttons have been pressed
+// function to add html tags to the chat input field once buttons have been pressed
 function addButtonText(tag) {
   let newtext = "<"+tag+"> </" +tag+">";
   document.getElementById('message').value += newtext;
 }
 
+//adds working buttons to input field to avoid hard-coding
 function addButtons() {
   let styleBar = document.getElementById("bar");
   let form = document.getElementById("newMessage");
   let child = document.getElementById("message");
+  //section creates a working button for every item on tags
   for(let tag in tags){
     if(tags[tag]["isButton"]){
       let button = document.createElement("button");
