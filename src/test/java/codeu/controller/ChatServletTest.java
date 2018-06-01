@@ -71,7 +71,9 @@ public class ChatServletTest {
 
     mockUserStore = Mockito.mock(UserStore.class);
     chatServlet.setUserStore(mockUserStore);
-    chatOk.addTags("div","span","strong","em","del","style","mark","sub","sup","h1","h2","h3","h4","h5","h6","blockquote","cite","dfn","a","img","iframe","code","samp");
+    chatOk.addTags("div","span","strong","em","del","style","mark","sub","sup",
+                   "h1","h2","h3","h4","h5","h6","blockquote","cite","dfn","a",
+                   "img","iframe","code","samp");
     chatOk.addAttributes("div", "class", "id","style")
           .addAttributes("span", "class", "id","style")
           .addAttributes("style", "type","scoped")
@@ -196,7 +198,7 @@ public class ChatServletTest {
   public void testDoGet_JsoupWhitelist() {
     Assert.assertEquals(Jsoup.clean("<strong>Hello World</strong>", chatOk) ,"<strong>Hello World</strong>");
     Assert.assertEquals(Jsoup.clean("<em>Hello World</em>", chatOk) ,"<em>Hello World</em>");
-    Assert.assertEquals(Jsoup.clean("<li>Hello World</li>", chatOk) ,"Hello World");    
+    Assert.assertEquals(Jsoup.clean("<li>Hello World</li>", chatOk) ,"Hello World");
     Assert.assertEquals(Jsoup.clean("<h1>Hello World</h1>", chatOk) ,"<h1>Hello World</h1>");
     Assert.assertEquals(Jsoup.clean("<strong><em>Hello World</em></strong>", chatOk) ,"<strong><em>Hello World</em></strong>");
     Assert.assertEquals(Jsoup.clean("<script> Hello World </script>", chatOk) ,"");

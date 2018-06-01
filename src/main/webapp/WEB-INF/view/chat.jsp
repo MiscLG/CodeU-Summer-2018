@@ -36,20 +36,9 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
     }
   </style>
 
-  <script>
-    // scroll the chat div to the bottom
-    function scrollChat() {
-      var chatDiv = document.getElementById('chat');
-      chatDiv.scrollTop = chatDiv.scrollHeight;
-    }
-    function addtext(tag) {
-    	let newtext = "<"+tag+"> </" +tag+">";
-    	document.getElementById('message').value += newtext;
-    }
-
-  </script>
+  <script src="/javascript/chat.js"></script>
 </head>
-<body onload="scrollChat()">
+<body onload="callFunctions()">
 
   <nav>
     <a id="navTitle" href="/">CodeU Chat App</a>
@@ -86,21 +75,14 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
     <hr/>
 
     <% if (request.getSession().getAttribute("user") != null) { %>
-    <form action="/chat/<%= conversation.getTitle() %>" method="POST">
+    <form id="newMessage" action="/chat/<%= conversation.getTitle() %>" method="POST">
       <h3>
         Preview:
       </h3>
         <p id="preview"></p>
-        <nav>
-          <button type="button" onclick="addtext('strong')"><strong>B</strong></button>
-          <button type="button" onclick="addtext('em')"><em>I</em></button>
-          <button type="button" onclick="addtext('del')"><del>S</del></button>
-          <button type="button" onclick="addtext('mark')"><mark>H</mark></button>
+        <nav id="bar">
         </nav>
-        <input id="message" name="message" style ="width:796px;height:50px" placeholder="Write a message here..." onkeyup="document.getElementById('preview').innerHTML = this.value">
-        <!-- testing a different way to do this
-          <p id="message" name="message" style ="max-width:800px;height:200px;border:solid 1px black" contenteditable="true" onkeyup="document.getElementById('preview').innerHTML = this.value">
-        !-->
+        <input id="message" name="message"  onkeyup="document.getElementById('preview').innerHTML = this.value">
         <br/>
         <button type="submit">Send</button>
 

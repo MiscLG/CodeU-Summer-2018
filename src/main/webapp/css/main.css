@@ -56,3 +56,8 @@ input {
 button {
   font-size: 18px;
 }
+#message {
+  width: 796px ;
+  height: 50px;
+  placeholder: "Write a message here...";
+}
