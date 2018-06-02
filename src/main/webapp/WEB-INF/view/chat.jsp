@@ -36,15 +36,9 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
     }
   </style>
 
-  <script>
-    // scroll the chat div to the bottom
-    function scrollChat() {
-      var chatDiv = document.getElementById('chat');
-      chatDiv.scrollTop = chatDiv.scrollHeight;
-    };
-  </script>
+  <script src="/javascript/chat.js"></script>
 </head>
-<body onload="scrollChat()">
+<body onload="callFunctions()">
 
   <nav>
     <a id="navTitle" href="/">CodeU Chat App</a>
@@ -81,10 +75,17 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
     <hr/>
 
     <% if (request.getSession().getAttribute("user") != null) { %>
-    <form action="/chat/<%= conversation.getTitle() %>" method="POST">
-        <input type="text" name="message">
+    <form id="newMessage" action="/chat/<%= conversation.getTitle() %>" method="POST">
+      <h3>
+        Preview:
+      </h3>
+        <p id="preview"></p>
+        <nav id="bar">
+        </nav>
+        <input id="message" name="message"  onkeyup="document.getElementById('preview').innerHTML = this.value">
         <br/>
         <button type="submit">Send</button>
+
     </form>
     <% } else { %>
       <p><a href="/login">Login</a> to send a message.</p>
