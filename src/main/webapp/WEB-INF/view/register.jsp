@@ -23,17 +23,12 @@
 
   <nav>
     <a id="navTitle" href="/">CodeU Chat App</a>
-    <a href="/conversations">Conversations</a>
-    <% if(request.getSession().getAttribute("user") != null) { %>
-      <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
-    <% } else { %>
-      <a href="/login">Login</a>
-    <% } %>
+    <a href="/login.jsp">Login</a>
     <a href="/about.jsp">About</a>
   </nav>
 
   <div id="container">
-    <h1>Register</h1>
+    <h1 style="text-align:center;">Register</h1>
 
     <% if(request.getAttribute("error") != null){ %>
         <h2 style="color:red"><%= request.getAttribute("error") %></h2>
