@@ -31,13 +31,12 @@
     <% } %>
     <a href="/about.jsp">About</a>
     <% if(request.getSession().getAttribute("admin") != null){ %>    
-        <a href="/admin.jsp">Admin</a>
+        <a href="/admin">Admin</a>
     <% } %>
   </nav>
 
   <div id="container">
-    <div
-      style="width:75%; margin-left:auto; margin-right:auto; margin-top: 50px;">
+    <div id = "paragaph">
 
       <h1>About the CodeU Chat App</h1>
       <p> This CodeU Chat app is designed by Luis Garcia Cerecedo, Arafat Mohammaed, and Lizzy Riffle.</p>      

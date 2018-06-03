@@ -50,7 +50,7 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
     <% } %>
     <a href="/about.jsp">About</a>
     <% if(request.getSession().getAttribute("admin") != null){ %>    
-        <a href="/admin.jsp">Admin</a>
+        <a href="/admin">Admin</a>
     <% } %>
   </nav>
 

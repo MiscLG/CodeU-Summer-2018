@@ -31,7 +31,7 @@
     <% } %>
     <a href="/about.jsp">About</a>
     <% if(request.getSession().getAttribute("admin") != null){ %>    
-        <a href="/admin.jsp">Admin</a>
+        <a href="/admin">Admin</a>
     <% } %>
   </nav>
 
@@ -43,7 +43,6 @@
 
       <ul>
         <li><a href="/login">Login</a> to get started.</li>
-        <li><a href="/admin.jsp">Admin</a> to view stats.</li>
         <li>Go to the <a href="/conversations">conversations</a> page to
             create or join a conversation.</li>
         <li>View the <a href="/about.jsp">about</a> page to learn more about the
