@@ -85,7 +85,6 @@ public class LoginServlet extends HttpServlet {
 
     request.getSession().setAttribute("user", username);
     if(username.equals("lriffle")) {
-    	System.out.print("test");
     	 request.getSession().setAttribute("admin", "yes");
     }
     response.sendRedirect("/conversations");
