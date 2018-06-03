@@ -30,6 +30,9 @@
       <a href="/login">Login</a>
     <% } %>
     <a href="/about.jsp">About</a>
+    <% if(request.getSession().getAttribute("admin") != null){ %>    
+        <a href="/admin.jsp">Admin</a>
+    <% } %>
   </nav>
 
   <div id="container">
@@ -37,6 +40,8 @@
       style="width:75%; margin-left:auto; margin-right:auto; margin-top: 50px;">
 
       <h1>About the CodeU Chat App</h1>
+      <p> This CodeU Chat app is designed by Luis Garcia Cerecedo, Arafat Mohammaed, and Lizzy Riffle.</p>      
+        
       <p>
         This is an example chat application designed to be a starting point
         for your CodeU project team work. Here's some stuff to think about:
