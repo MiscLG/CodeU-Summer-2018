@@ -13,6 +13,11 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 --%>
+    
+<%@ page import="java.util.List" %>
+<%@ page import="codeu.model.data.Conversation" %>
+
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,14 +36,20 @@
     <% } %> 
     <a href="/about.jsp">About</a>
     <% if(request.getSession().getAttribute("admin") != null){ %>    
-        <a href="/admin.jsp">Admin</a>
+        <a href="/admin">Admin</a>
     <% } %>
   </nav>
 
   <div id="container">
-    <div
-      style="width:75%; margin-left:auto; margin-right:auto; margin-top: 50px;">
-      <a>This is the admin page</a>
+    <div id="paragraph">
+      <ul>
+        <li><strong>Users: </strong></li>
+        <li><strong>Conversations: </strong> <%= request.getAttribute("conversationCount") %> </li>
+        <li><strong>Messages: </strong></li>
+        <li><strong>Most active user: </strong></li>  
+        <li><strong>Newest user: </strong></li>  
+        <li><strong>Wordiest user: </strong></li>  
+      </ul>
     </div>
   </div>
 </body>

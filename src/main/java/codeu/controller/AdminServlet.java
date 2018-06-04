@@ -14,24 +14,25 @@
 
 package codeu.controller;
 
-import codeu.model.data.User;
 import codeu.model.store.basic.UserStore;
 import java.io.IOException;
+import java.time.Instant;
+import java.util.List;
+import java.util.UUID;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.mindrot.jbcrypt.BCrypt;
 
-/** Servlet class responsible for the login page. */
+/** Servlet class responsible for the admin page. */
 public class AdminServlet extends HttpServlet {
 
   /** Store class that gives access to Users. */
   private UserStore userStore;
 
   /**
-   * Set up state for handling login-related requests. This method is only called when running in a
+   * Set up state for handling admin-related requests. This method is only called when running in a
    * server, not when running in a test.
    */
   @Override
@@ -49,13 +50,13 @@ public class AdminServlet extends HttpServlet {
   }
 
   /**
-   * This function fires when a user requests the /login URL. It simply forwards the request to
-   * login.jsp.
+   * This function fires when a user requests the /admin URL. It simply forwards the request to
+   * admin.jsp.
    */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws IOException, ServletException {
-    request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
+    request.getRequestDispatcher("/admin.jsp").forward(request, response);
   }
 
 }
