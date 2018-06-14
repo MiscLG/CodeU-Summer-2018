@@ -84,9 +84,29 @@ public class MessageStore {
 
     return messagesInConversation;
   }
+  
+  /** Access  all the messages written by a user. */
+  public List<Message> getMessagesByUser(UUID authorId) {
+	 
+	  List<Message> messagesOfUser = new ArrayList<>();
+
+	    for (Message message : messages) {
+	      if (message.getAuthorId().equals(authorId)) {
+	    	  messagesOfUser.add(message);
+	      }
+	    }
+
+	    return messagesOfUser;
+  }
+  
 
   /** Sets the List of Messages stored by this MessageStore. */
   public void setMessages(List<Message> messages) {
     this.messages = messages;
+  }
+  
+  /** Gets the List of Messages stored by this MessageStore. */
+  public int getMessagesCount() {
+	  return this.messages.size();
   }
 }

@@ -21,7 +21,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>CodeU Chat App</title>
+  <title>Admin</title>
   <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
@@ -42,13 +42,14 @@
 
   <div id="container">
     <div id="paragraph">
+        <h1>Admin: Site Statistics</h1>
+        
       <ul>
-        <li><strong>Users: </strong></li>
+        <li><strong>Users: </strong> <%= request.getAttribute("userCount") %></li>
         <li><strong>Conversations: </strong> <%= request.getAttribute("conversationCount") %> </li>
-        <li><strong>Messages: </strong></li>
-        <li><strong>Most active user: </strong></li>  
-        <li><strong>Newest user: </strong></li>  
-        <li><strong>Wordiest user: </strong></li>  
+        <li><strong>Messages: </strong><%= request.getAttribute("messageCount") %></li>
+        <li><strong>Most active user: </strong><%= request.getAttribute("mostActiveUser") %></li>  
+        <li><strong>Newest user: </strong><%= request.getAttribute("newestUser") %></li>    
       </ul>
     </div>
   </div>
