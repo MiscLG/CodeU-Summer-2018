@@ -80,25 +80,23 @@ public class AdminServlet extends HttpServlet {
   /**Gets the user who has sent the most messages. If there is a tie, the user who registered
    * first is given.
    * */
-  String mostActiveUser() {
+  String mostActiveUser() { 
+    List<User> users = userStore.getUsers();
+    int maxMessages = 0;
+    User mostActive = null;
 	  
-	  List<User> users = userStore.getUsers();
-	  
-	  int maxMessages = 0;
-	  User mostActive = null;
-	  
-	  for (User user : users) {
-		  List<Message> messages = messageStore.getMessagesByUser(user.getId());
-		  int messageCount = messages.size();
-		  if(messageCount > maxMessages) {
-			  maxMessages = 0;
-			  mostActive = user;
-		  }	  
-	  }
-	  if(mostActive != null) {
-		  return mostActive.getName();
-	  }
-	  return "N/A";
+    for (User user : users) {
+        List<Message> messages = messageStore.getMessagesByUser(user.getId());
+	    int messageCount = messages.size();
+        if(messageCount > maxMessages) {
+        maxMessages = 0;
+		    mostActive = user;
+        }	  
+     }
+     if(mostActive != null) {
+          return mostActive.getName();
+      }
+      return "N/A";
   }
 
   /**
