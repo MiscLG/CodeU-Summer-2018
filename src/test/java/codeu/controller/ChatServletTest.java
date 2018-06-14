@@ -35,6 +35,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
+import org.jsoup.Jsoup;
+import org.jsoup.safety.Whitelist;
 
 public class ChatServletTest {
 
@@ -46,6 +48,7 @@ public class ChatServletTest {
   private ConversationStore mockConversationStore;
   private MessageStore mockMessageStore;
   private UserStore mockUserStore;
+  private Whitelist chatOk = new Whitelist();
 
   @Before
   public void setup() {
@@ -68,6 +71,16 @@ public class ChatServletTest {
 
     mockUserStore = Mockito.mock(UserStore.class);
     chatServlet.setUserStore(mockUserStore);
+    chatOk.addTags("div","span","strong","em","del","style","mark","sub","sup",
+                   "h1","h2","h3","h4","h5","h6","blockquote","cite","dfn","a",
+                   "img","iframe","code","samp");
+    chatOk.addAttributes("div", "class", "id","style")
+          .addAttributes("span", "class", "id","style")
+          .addAttributes("style", "type","scoped")
+          .addAttributes("a","href")
+          .addAttributes("img","align","src","width","height","alt")
+          .addAttributes("iframe","align","src","width","height","allow","allowfullscreen")
+          .addAttributes("blockquote","cite");
   }
 
   @Test
@@ -181,6 +194,18 @@ public class ChatServletTest {
     Mockito.verify(mockResponse).sendRedirect("/chat/test_conversation");
   }
 
+  @Test
+  public void testDoGet_JsoupWhitelist() {
+    Assert.assertEquals(Jsoup.clean("<strong>Hello World</strong>", chatOk) ,"<strong>Hello World</strong>");
+    Assert.assertEquals(Jsoup.clean("<em>Hello World</em>", chatOk) ,"<em>Hello World</em>");
+    Assert.assertEquals(Jsoup.clean("<li>Hello World</li>", chatOk) ,"Hello World");
+    Assert.assertEquals(Jsoup.clean("<h1>Hello World</h1>", chatOk) ,"<h1>Hello World</h1>");
+    Assert.assertEquals(Jsoup.clean("<strong><em>Hello World</em></strong>", chatOk) ,"<strong><em>Hello World</em></strong>");
+    Assert.assertEquals(Jsoup.clean("<script> Hello World </script>", chatOk) ,"");
+    Assert.assertEquals(Jsoup.clean("<strong><script> Hello World </script></strong>", chatOk) ,"<strong></strong>");
+    Assert.assertEquals(Jsoup.clean("<em><h2>Hello World</h2></em>", chatOk) ,"<em><h2>Hello World</h2></em>");
+    Assert.assertEquals(Jsoup.clean("<strong><strong> Hello World </strong></strong>", chatOk) ,"<strong><strong> Hello World </strong></strong>");
+  }
   @Test
   public void testDoPost_CleansHtmlContent() throws IOException, ServletException {
     Mockito.when(mockRequest.getRequestURI()).thenReturn("/chat/test_conversation");

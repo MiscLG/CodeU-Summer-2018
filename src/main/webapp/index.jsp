@@ -15,6 +15,7 @@ limitations under the License.
 --%>
 <!DOCTYPE html>
 <html>
+
   <head>
     <title>CodeU Chat App</title>
     <link rel="stylesheet" href="/css/main.css">
@@ -24,6 +25,9 @@ limitations under the License.
       <nav>
         <a id="navTitle" href="/">CodeU Chat App</a>
         <% if(request.getSession().getAttribute("user") != null){ %>
+        <% if(request.getSession().getAttribute("admin") != null){ %>    
+        <a href="/admin">Admin</a>
+    <% } %>
         <a href="/profiles">Profile</a>
         <a href="/conversations">Conversations</a>
         <a href="/">Logout</a>
@@ -46,6 +50,7 @@ limitations under the License.
           <ul>
             <li><a href="/login">Login</a> to get started.</li>
             <li>Go to the <a href="/conversations">conversations</a> page to
+
             create or join a conversation.</li>
             <li>View the <a href="/about.jsp">about</a> page to learn more about the
             project.</li>

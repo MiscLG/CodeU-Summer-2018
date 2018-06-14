@@ -126,4 +126,27 @@ public class UserStore {
   public void setUsers(List<User> users) {
     this.users = users;
   }
+  
+  /**
+   * Gets the name of the newest user.
+   */
+  public String getNewestUser() {
+	  if(users.size() > 0)
+	   return this.users.get(users.size()-1).getName();
+	  return "N/A";
+  }
+  
+  /**
+   * Gets number of users.
+   */
+  public int getUserCount() {
+	  return this.users.size();
+  }
+  
+  /**
+   * Gets list of all users.
+   */
+  public List<User> getUsers() {
+	  return users;
+  }
 }

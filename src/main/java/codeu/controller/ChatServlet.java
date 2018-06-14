@@ -43,6 +43,9 @@ public class ChatServlet extends HttpServlet {
   /** Store class that gives access to Users. */
   private UserStore userStore;
 
+  /**this creates a custom Whitelist*/
+  private Whitelist chatOk = new Whitelist();
+
   /** Set up state for handling chat requests. */
   @Override
   public void init() throws ServletException {
@@ -50,6 +53,17 @@ public class ChatServlet extends HttpServlet {
     setConversationStore(ConversationStore.getInstance());
     setMessageStore(MessageStore.getInstance());
     setUserStore(UserStore.getInstance());
+    //this sets the HTML tags that the user will be allowed to use
+    chatOk.addTags("div","span","strong","em","del","style","mark","sub","sup",
+                   "h1","h2","h3","h4","h5","h6","blockquote","cite","dfn","a",
+                   "img","iframe","code","samp");
+    chatOk.addAttributes("div", "class", "id","style")
+          .addAttributes("span", "class", "id","style")
+          .addAttributes("style", "type","scoped")
+          .addAttributes("a","href")
+          .addAttributes("img","align","src","width","height","alt")
+          .addAttributes("iframe","align","src","width","height","allow","allowfullscreen")
+          .addAttributes("blockquote","cite");
   }
 
   /**
@@ -140,8 +154,8 @@ public class ChatServlet extends HttpServlet {
 
     String messageContent = request.getParameter("message");
 
-    // this removes any HTML from the message content
-    String cleanedMessageContent = Jsoup.clean(messageContent, Whitelist.none());
+    // this removes any unwanted HTML from the message content
+    String cleanedMessageContent = Jsoup.clean(messageContent, chatOk);
 
     Message message =
         new Message(
