@@ -28,26 +28,30 @@ limitations under the License.
         document.getElementById("user_input").value;
       }
       </script>
+      
       <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
-        <title>Register</title>
-        <link rel="stylesheet" href="/css/main.css">
-        </head>
+      <link rel="stylesheet" href="/css/main.css">
+      <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+      <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+      <title>Register</title>
+   </head>
+    
         <body>
 
-          <nav>
+        <nav>
             <a id="navTitle" href="/">CodeU Chat App</a>
-            <% if(request.getSession().getAttribute("user") != null){ %>
-            <a href="/profiles">Profile</a>
-            <a href="/conversations">Conversations</a>
             <a href="/about.jsp">About</a>
-            <a href="/">Logout</a>
+            <% if(request.getSession().getAttribute("user") != null){ %>
+                <a href="/profiles">Profile</a>
+                <a href="/conversations">Conversations</a>
+                <a href="/">Logout</a>
+                <% if(request.getSession().getAttribute("admin") != null) %>    
+                    <a href="/admin">Admin</a>
             <% } else{ %>
-            <a href="/login">Login</a>
+                <a href="/login">Login</a>
+                <a href="/register">Register</a>
             <% } %>
-          </nav>
+        </nav>
 
           <div class="container">
             <div class="span3 well">

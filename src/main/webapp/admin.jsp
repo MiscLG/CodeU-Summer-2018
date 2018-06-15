@@ -26,19 +26,20 @@
 </head>
 <body>
 
-  <nav>
-    <a id="navTitle" href="/">CodeU Chat App</a>
-    <a href="/conversations">Conversations</a>
-    <% if(request.getSession().getAttribute("user") != null){ %>
-      <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
-    <% } else{ %>
-      <a href="/login">Login</a>
-    <% } %> 
-    <a href="/about.jsp">About</a>
-    <% if(request.getSession().getAttribute("admin") != null){ %>    
-        <a href="/admin">Admin</a>
-    <% } %>
-  </nav>
+    <nav>
+        <a id="navTitle" href="/">CodeU Chat App</a>
+        <a href="/about.jsp">About</a>
+        <% if(request.getSession().getAttribute("user") != null){ %>
+            <a href="/profiles">Profile</a>
+            <a href="/conversations">Conversations</a>
+            <a href="/">Logout</a>
+            <% if(request.getSession().getAttribute("admin") != null) %>    
+                <a href="/admin">Admin</a>
+        <% } else{ %>
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+        <% } %>
+    </nav>
 
   <div id="container">
     <div id="paragraph">
