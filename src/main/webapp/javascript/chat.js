@@ -66,6 +66,8 @@ function addButtons() {
     if(tags[tag]["isButton"]){
       let button = document.createElement("button");
       button.setAttribute("type","button");
+      button.setAttribute("class","button");
+      button.setAttribute("id",tag);
       button.setAttribute("onclick","addButtonText('"+tag+"')");
       let innerTag = document.createElement(tag);
       let innerTagText = document.createTextNode(tags[tag]["buttonText"]);

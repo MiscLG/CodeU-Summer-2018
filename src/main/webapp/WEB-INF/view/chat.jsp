@@ -27,7 +27,7 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
   <head>
     <title><%= conversation.getTitle() %></title>
     <link rel="stylesheet" href="/css/main.css" type="text/css">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
     #chat {
       background-color: white;
@@ -35,25 +35,26 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
       overflow-y: scroll
     }
     </style>
-
-    <script>
+    <script src="/javascript/chat.js"></script>
+    <!--<script>
     // scroll the chat div to the bottom
     function scrollChat() {
       var chatDiv = document.getElementById('chat');
       chatDiv.scrollTop = chatDiv.scrollHeight;
     };
     </script>
+    /!-->
   </head>
-  <body onload="scrollChat()">
+  <body onload="callFunctions()">
 
     <nav>
       <a id="navTitle" href="/">CodeU Chat App</a>
       <% if(request.getSession().getAttribute("user") != null){ %>
-      <% if(request.getSession().getAttribute("admin") != null){ %>    
+      <% if(request.getSession().getAttribute("admin") != null){ %>
         <a href="/admin">Admin</a>
     <% } %>
       <a href="/profiles">Profile</a>
-      <a href="/conversations">Conversations</a>
+      <a href="/conversations">Chats</a>
       <a href="/about.jsp">About</a>
       <a href="/">Logout</a>  <!-- set user to null so it's logged out-->
       <% } else{ %>
@@ -65,8 +66,8 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
 
     <div id="container">
 
-      <h1><%= conversation.getTitle() %>
-      <a href="" style="float: right">&#8635;</a></h1>
+      <h1 id="title"><%= conversation.getTitle() %>
+      <a id="reload" href="" style="float: right">&#8635;</a></h1>
 
       <hr/>
 
@@ -89,15 +90,15 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
 
     <% if (request.getSession().getAttribute("user") != null) { %>
     <form id="newMessage" action="/chat/<%= conversation.getTitle() %>" method="POST">
-      <h3>
+      <h3 class="preview">
         Preview:
       </h3>
-        <p id="preview"></p>
+        <p class="preview" id="preview"></p>
         <nav id="bar">
         </nav>
         <input id="message" name="message"  onkeyup="document.getElementById('preview').innerHTML = this.value">
         <br/>
-        <button type="submit">Send</button>
+        <button type="submit" id="submit">Send</button>
 
     </form>
     <% } else { %>
