@@ -47,19 +47,18 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
   <body onload="scrollChat()">
 
     <nav>
-      <a id="navTitle" href="/">CodeU Chat App</a>
-      <% if(request.getSession().getAttribute("user") != null){ %>
-      <% if(request.getSession().getAttribute("admin") != null){ %>    
-        <a href="/admin">Admin</a>
-    <% } %>
-      <a href="/profiles">Profile</a>
-      <a href="/conversations">Conversations</a>
-      <a href="/about.jsp">About</a>
-      <a href="/">Logout</a>  <!-- set user to null so it's logged out-->
-      <% } else{ %>
-      <a href="/login">Login</a>
-      <a href="/about.jsp">About</a>
-      <% } %>
+        <a id="navTitle" href="/">CodeU Chat App</a>
+        <a href="/about.jsp">About</a>
+        <% if(request.getSession().getAttribute("user") != null){ %>
+            <a href="/profiles">Profile</a>
+            <a href="/conversations">Conversations</a>
+            <a href="/">Logout</a>
+            <% if(request.getSession().getAttribute("admin") != null) %>    
+                <a href="/admin">Admin</a>
+        <% } else{ %>
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+        <% } %>
     </nav>
 
 
