@@ -93,10 +93,13 @@ button {
     /*background-color:red;*/
     width: 24%;
   }
-  textarea,input[type="text"]{
+  textarea{
     display:block;
     width:100%;
-    height:10%;
+  }
+  input[type="text"],input[type="password"] {
+    width:96%;
+    padding:1%;
   }
   #navTitle{
     font-size:24px;

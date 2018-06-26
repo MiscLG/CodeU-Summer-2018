@@ -75,7 +75,7 @@ limitations under the License.
           </form>
           <br>
             <!--submit button-->
-            <input type="submit" value = "Update"  onclick="showInput();" style="position:relative; top:0px; left: 50%;"><br/>
+            <input type="submit" value = "Update"  onclick="showInput();" ><br/>
             <br>
 
               <h2 style="text-align:center;">Recent Conversations</h2>
@@ -91,7 +91,7 @@ limitations under the License.
               }
               else{
                 %>
-                <ul class="mdl-list" style="position:relative;left: 35%;">
+                <ul class="mdl-list">
                   <%
                   for(Conversation conversation : conversations){
                     %>
