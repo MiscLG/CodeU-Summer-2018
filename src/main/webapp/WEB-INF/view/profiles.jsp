@@ -21,7 +21,9 @@ limitations under the License.
 <html>
   <head lang="en">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <script language="JavaScript">
+
         <!--gets the user input to be dispayed-->
       function showInput() {
         document.getElementById('display').innerHTML =

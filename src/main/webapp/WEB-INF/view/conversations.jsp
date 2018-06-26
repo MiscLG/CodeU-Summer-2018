@@ -20,6 +20,7 @@ limitations under the License.
 <html>
   <head>
     <title>Conversations</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/main.css">
     </head>
     <body>
@@ -28,9 +29,9 @@ limitations under the License.
       <nav>
         <a id="navTitle" href="/">CodeU Chat App</a>
         <% if(request.getSession().getAttribute("user") != null){ %>
-      <% if(request.getSession().getAttribute("admin") != null){ %>    
+      <% if(request.getSession().getAttribute("admin") != null){ %>
         <a href="/admin">Admin</a>
-    <% } %>  
+    <% } %>
       <a href="/profiles">Profile</a>
         <a href="/conversations">Conversations</a>
         <a href="/about.jsp">About</a>
