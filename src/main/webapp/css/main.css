@@ -136,12 +136,13 @@ button {
     position: fixed;
     bottom:10%;
     text-align:left;
+    z-index: 1;
   }
   #reload{
     position:fixed;
     right: 3%;
     bottom:10%;
-    z-index: 1;
+    z-index: 2;
     color:white;
   }
   #submit{
