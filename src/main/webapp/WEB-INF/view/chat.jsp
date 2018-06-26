@@ -95,7 +95,7 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
         <p class="preview" id="preview"></p>
         <nav id="bar">
         </nav>
-        <input id="message" name="message"  onkeyup="document.getElementById('preview').innerHTML = this.value">
+        <input type="text" id="message" name="message"  onkeyup="document.getElementById('preview').innerHTML = this.value">
         <br/>
         <button type="submit" id="submit">Send</button>
 
