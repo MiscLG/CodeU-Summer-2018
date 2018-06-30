@@ -13,15 +13,16 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 --%>
-    
+
 <%@ page import="java.util.List" %>
 <%@ page import="codeu.model.data.Conversation" %>
 
-    
+
 <!DOCTYPE html>
 <html>
 <head>
   <title>Admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
@@ -31,9 +32,9 @@
         <a href="/about.jsp">About</a>
         <% if(request.getSession().getAttribute("user") != null){ %>
             <a href="/profiles">Profile</a>
-            <a href="/conversations">Conversations</a>
+            <a href="/conversations">Chats</a>
             <a href="/">Logout</a>
-            <% if(request.getSession().getAttribute("admin") != null) %>    
+            <% if(request.getSession().getAttribute("admin") != null) %>
                 <a href="/admin">Admin</a>
         <% } else{ %>
             <a href="/login">Login</a>
@@ -44,13 +45,13 @@
   <div id="container">
     <div id="paragraph">
         <h1>Admin: Site Statistics</h1>
-        
+
       <ul>
         <li><strong>Users: </strong> <%= request.getAttribute("userCount") %></li>
         <li><strong>Conversations: </strong> <%= request.getAttribute("conversationCount") %> </li>
         <li><strong>Messages: </strong><%= request.getAttribute("messageCount") %></li>
-        <li><strong>Most active user: </strong><%= request.getAttribute("mostActiveUser") %></li>  
-        <li><strong>Newest user: </strong><%= request.getAttribute("newestUser") %></li>    
+        <li><strong>Most active user: </strong><%= request.getAttribute("mostActiveUser") %></li>
+        <li><strong>Newest user: </strong><%= request.getAttribute("newestUser") %></li>
       </ul>
     </div>
   </div>
