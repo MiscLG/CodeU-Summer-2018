@@ -74,7 +74,7 @@ limitations under the License.
             <div class="span3 well">
               <center>
 <!---Displays profileImage //https://www.gstatic.com/webp/gallery3/2.png//-->
-                <img src="" name="profileImage" id="photo" width="140" height="140">
+                <img src="" name="profileImage" id="photo" width="160" height="160" class="img-circle">
 <!-- Displays username-->
                 <h3 style="text-transform: uppercase;" ><%= request.getSession().getAttribute("user") %></h3>
 <!-- Displays status-->
