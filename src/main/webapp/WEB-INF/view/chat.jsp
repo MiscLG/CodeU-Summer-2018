@@ -87,6 +87,7 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
 
     <hr/>
 
+    <div id="messageBlock">
     <% if (request.getSession().getAttribute("user") != null ) { %>
         <script type="text/javascript">
         $(document).ready(function(){
@@ -103,9 +104,9 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
         }) ;  
         </script>  
     <form id="newMessage"  action="/mail/<%= conversation.getTitle() %>" method="POST">
-      <h3 class="preview">
-        Preview:
-      </h3>
+      <div id="previewBlock">
+        <p id="preview">Preview:</p>
+      </div>
         <p class="preview" id="preview"></p>
         <nav id="bar">
         </nav>
@@ -113,11 +114,12 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
         <br/>
         <button type="submit" id="submit">Send</button>
     </form>
+
     <% } else { %>
 
       <p><a href="/login">Login</a> to send a message.</p>
       <% } %>
-
+   </div>
       <hr/>
 
     </div>

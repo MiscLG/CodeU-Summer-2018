@@ -27,7 +27,7 @@ limitations under the License.
         <a href="/about.jsp">About</a>
         <% if(request.getSession().getAttribute("user") != null){ %>
             <a href="/profiles">Profile</a>
-            <a href="/conversations">Conversations</a>
+            <a href="/conversations">Chats</a>
             <a href="/">Logout</a>
             <% if(request.getSession().getAttribute("admin") != null) %>
                 <a href="/admin">Admin</a>
