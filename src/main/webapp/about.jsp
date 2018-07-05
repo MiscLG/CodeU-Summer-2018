@@ -38,9 +38,7 @@ limitations under the License.
     </nav>
 
       <div id="container">
-        <div
-          style="width:75%; margin-left:auto; margin-right:auto; margin-top: 50px;">
-
+        <div id="paragraph">
           <h1>About the CodeU Chat App</h1>
           <p>
             This is an example chat application designed to be a starting point
@@ -49,15 +47,15 @@ limitations under the License.
 
 
           <ul>
-            <li><strong>Algorithms and data structures:</strong> We've made the app
+            <li><h4>Algorithms and data structures:</h4> We've made the app
             and the code as simple as possible. You will have to extend the
             existing data structures to support your enhancements to the app,
             and also make changes for performance and scalability as your app
             increases in complexity.</li>
-            <li><strong>Look and feel:</strong> The focus of CodeU is on the Java
+            <li><h4>Look and feel:</h4> The focus of CodeU is on the Java
             side of things, but if you're particularly interested you might use
             HTML, CSS, and JavaScript to make the chat app prettier.</li>
-            <li><strong>Customization:</strong> Think about a group you care about.
+            <li><h4>Customization:</h4> Think about a group you care about.
             What needs do they have? How could you help? Think about technical
             requirements, privacy concerns, and accessibility and
             internationalization.</li>

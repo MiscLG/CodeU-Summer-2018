@@ -86,25 +86,24 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
     <hr/>
 
     <hr/>
-
+    <div id="messageBlock">
     <% if (request.getSession().getAttribute("user") != null) { %>
     <form id="newMessage" action="/chat/<%= conversation.getTitle() %>" method="POST">
-      <h3 class="preview">
-        Preview:
-      </h3>
-        <p class="preview" id="preview"></p>
-        <nav id="bar">
-        </nav>
-        <input type="text" id="message" name="message"  onkeyup="document.getElementById('preview').innerHTML = this.value">
-        <br/>
-        <button type="submit" id="submit">Send</button>
-
+      <div id="previewBlock">
+        <p id="preview">Preview:</p>
+      </div>
+      <nav id="bar">
+      </nav>
+      <input type="text" id="message" name="message"  onkeyup="document.getElementById('preview').innerHTML = this.value">
+      <br/>
+      <button type="submit" id="submit">Send</button>
     </form>
+
     <% } else { %>
 
       <p><a href="/login">Login</a> to send a message.</p>
       <% } %>
-
+   </div>
       <hr/>
 
     </div>
