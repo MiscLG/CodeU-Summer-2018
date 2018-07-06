@@ -59,6 +59,11 @@ input[type="text"],input[type="password"] {
 #container {
   bottom:20%;
 }
+#chat {
+  background-color: white;
+  height: 500px;
+  overflow-y: scroll
+}
 #messageBlock {
   display:block;
   position:fixed;
