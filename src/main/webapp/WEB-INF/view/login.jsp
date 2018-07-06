@@ -19,6 +19,9 @@ limitations under the License.
     <title>Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/mobile_first.css">
+    <style>
+    nav {  width:100%;  }
+    </style>
     </head>
     <body>
 
