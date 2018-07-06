@@ -28,14 +28,8 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
     <title><%= conversation.getTitle() %></title>
     <link rel="stylesheet" href="/css/mobile_first.css" type="text/css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-    #chat {
-      background-color: white;
-      height: 500px;
-      overflow-y: scroll
-    }
-    </style>
     <script src="/javascript/chat.js"></script>
+<<<<<<< HEAD
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!--<script>
     // scroll the chat div to the bottom
@@ -45,9 +39,10 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
     };
     </script>
     /!-->
+=======
+>>>>>>> fixes css bug on profile.jsp
   </head>
   <body onload="callFunctions()">
-
     <nav>
         <a id="navTitle" href="/">CodeU Chat App</a>
         <a href="/about.jsp">About</a>
