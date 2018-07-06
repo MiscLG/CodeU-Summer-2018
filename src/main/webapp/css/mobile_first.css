@@ -13,7 +13,6 @@
 * limitations under the License.
 */
 body {
-  border:1px solid black;
   margin: 0;
   text-align:center;
   font-family: sans-serif;
@@ -65,7 +64,6 @@ input[type="text"],input[type="password"] {
   position:fixed;
   height:20%;
   bottom:0%;
-  background-color:yellow;
   width:100%;
 }
 #message{
@@ -114,7 +112,7 @@ input[type="text"],input[type="password"] {
     color:white;
     background-color:grey;
   }
-@media screen and (min-width: 768px){
+@media screen and (min-width: 769px){
   body {
     margin: 0;
     font-family: sans-serif;
@@ -127,18 +125,21 @@ input[type="text"],input[type="password"] {
 
   nav {
     background-color: #283593;
+    padding:1%;
+    width:98%;
   }
 
   nav a {
     color: white;
     display: inline-block;
     font-size: 24px;
-    margin: 15px;
     text-decoration: none;
+    width:auto;
   }
 
   #navTitle {
     font-size: 36px;
+    width:auto;
   }
 
   #container {
@@ -158,11 +159,7 @@ input[type="text"],input[type="password"] {
     color: #757575;
   }
 
-  h3 {
-    color: blue;
-  }
-
-  h2 {
+  h3,h2{
     color: blue;
   }
 
@@ -178,5 +175,7 @@ input[type="text"],input[type="password"] {
     height: 50px;
     placeholder: "Write a message here...";
   }
-
+  #messageBlock,#submit,#reload, #message, #previewBlock, #bar{
+    position:static;
+  }
 }
