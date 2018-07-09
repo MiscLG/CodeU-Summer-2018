@@ -16,10 +16,14 @@
 
 package codeu.controller;
 
+import java.io.Console;
 // [START simple_includes]
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -31,17 +35,12 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletResponse; 
 
 @SuppressWarnings("serial")
 public class MailServlet extends HttpServlet {
-
-	@Override
-	  public void doGet(HttpServletRequest request, HttpServletResponse response)
-	      throws IOException, ServletException {
-	    request.getRequestDispatcher("/WEB-INF/view/mail.jsp").forward(request, response);
-	}
 	
+	private static final Logger logger = Logger.getLogger(MailServlet.class.getName());
 	
   @Override
   public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -50,6 +49,13 @@ public class MailServlet extends HttpServlet {
     resp.getWriter().print("Sending simple email.");
     sendSimpleMail();
   }
+  
+  @Override
+  public void doGet(HttpServletRequest request, HttpServletResponse response)
+      throws IOException, ServletException {
+	logger.log(Level.INFO, "Hits Mail serverlet");
+    request.getRequestDispatcher("/mail.jsp").forward(request, response);
+}
 
   private void sendSimpleMail() {
     Properties props = new Properties();
@@ -59,7 +65,7 @@ public class MailServlet extends HttpServlet {
       Message msg = new MimeMessage(session);
       msg.setFrom(new InternetAddress("lriffle@codeustudents.com"));
       msg.addRecipient(Message.RecipientType.TO,
-                       new InternetAddress("elizabethkriffle@gmail.com"));
+                       new InternetAddress("4259858290@vtext.com"));
       msg.setSubject("TEST");
       msg.setText("This is a test");
       Transport.send(msg);
