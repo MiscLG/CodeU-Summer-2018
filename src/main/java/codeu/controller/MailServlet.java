@@ -43,21 +43,27 @@ public class MailServlet extends HttpServlet {
 	private static final Logger logger = Logger.getLogger(MailServlet.class.getName());
 	
   @Override
-  public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-    String type = req.getParameter("type");
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    //String type = req.getParameter("type");
 
-    resp.getWriter().print("Sending simple email.");
-    sendSimpleMail();
+	 
+	 String messageContent = request.getParameter("message");
+    sendSimpleMail(messageContent);
+    
+    String requestUrl = request.getRequestURI();
+    String conversationTitle = requestUrl.substring("/mail/".length());
+    //response.sendRedirect("/login");
+    response.sendRedirect("/chat/" + conversationTitle);
   }
   
-  @Override
+  /*@Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws IOException, ServletException {
 	logger.log(Level.INFO, "Hits Mail serverlet");
     request.getRequestDispatcher("/mail.jsp").forward(request, response);
-}
+}*/
 
-  private void sendSimpleMail() {
+  private void sendSimpleMail(String messageContent) {
     Properties props = new Properties();
     Session session = Session.getDefaultInstance(props, null);
 
@@ -66,8 +72,8 @@ public class MailServlet extends HttpServlet {
       msg.setFrom(new InternetAddress("lriffle@codeustudents.com"));
       msg.addRecipient(Message.RecipientType.TO,
                        new InternetAddress("4259858290@vtext.com"));
-      msg.setSubject("TEST");
-      msg.setText("This is a test");
+      //msg.setSubject("TEST");
+      msg.setText(messageContent);
       Transport.send(msg);
     } catch (AddressException e) {
       // ...
