@@ -16,6 +16,13 @@ limitations under the License.
 
 <%@ page import="java.util.List" %>
 <%@ page import="codeu.model.data.Conversation" %>
+<%@ page import="com.google.appengine.api.blobstore.BlobstoreServiceFactory" %>
+<%@ page import="com.google.appengine.api.blobstore.BlobstoreService" %>
+
+
+<%
+    BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
+%>
 
 <!DOCTYPE html>
 <html>
@@ -33,7 +40,7 @@ limitations under the License.
         <!--gets the user input to be dispayed-->
       function showInput() {
         document.getElementById('status').innerHTML =
-        document.getElementById("user_input").value;
+        document.getElementById("status_name").value;
       }
 
       function showPhoto(){
@@ -74,39 +81,53 @@ limitations under the License.
             <div class="span3 well">
               <center>
 <!---Displays profileImage //https://www.gstatic.com/webp/gallery3/2.png//-->
-                <img src="" name="profileImage" id="photo" width="140" height="140">
+                <img src="/serve" name="profileImage" id="photo" width="160" height="160" class="img-circle">
 <!-- Displays username-->
                 <h3 style="text-transform: uppercase;" ><%= request.getSession().getAttribute("user") %></h3>
 <!-- Displays status-->
-                <em><p><span id='status'></span></p></em>
+<%
+String status =  (String)request.getAttribute("status_name");
+if (status == null) {
+    %>
+    <em><p><span id ='status'>No Status</span></p></em>
+      <%
+} else {
+      %>
+      <em><p><span id='status'><%=status%></span></p></em>
+      <%
+}
+%>
               </center>
             </div>
           </div>
 
 <!-- Uploading images-->
-          <form method="post">
-            <div>
+          <form action="<%= blobstoreService.createUploadUrl("/upload") %>" method="post" enctype="multipart/form-data">
+            <div style="text-align: center;">
               <div>
-                <h4>Change Profile</h4>
+                <h4 style="text-align:center;">Change Profile</h4>
               </div>
-              <div>
-                <input type="file" id="fileUpload" name="file" onchange="showPhoto()"/>
+              <div style="text-align: center;">
+                <input type="file" id="fileUpload" name="myFile" onchange="showPhoto()"/>
               </div>
             </div>
           </form>
+
 
           <!--updates status-->
           <h2 style="text-align:center;">Update Status</h2>
           <!--text field goes here-->
           <form>
             <div align = "center" margin-left:auto; margin-right:auto;>
-              <textarea placeholder="Type your status here" cols="70" rows="4" id="user_input" ></textarea>
+              <textarea name = "status_name" placeholder="Type your status here" cols="70" rows="4" id="status_name" ></textarea>
             </div>
           </form>
 
           <br>
             <!--submit button-->
+            <div style="text-align: center;">
             <input type="submit" value = "Update"  onclick="showInput();" ><br/>
+          </div>
             <br>
 
               <h2 style="text-align:center;">Recent Conversations</h2>
@@ -118,8 +139,7 @@ limitations under the License.
                 %>
                 <p style="text-align:center;">No recent conversations, why don't you start a new one? :)</p>
                 <%
-              }
-              else{
+              }else{
                 %>
                 <ul class="mdl-list">
                   <%

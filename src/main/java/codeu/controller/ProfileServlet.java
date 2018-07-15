@@ -71,7 +71,59 @@ public class ProfileServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws IOException, ServletException {
     List<Conversation> conversations = conversationStore.getAllConversations();
+    String username = (String) request.getSession().getAttribute("user");
+    String status = userStore.getUser(username).getStatus();
     request.setAttribute("conversations", conversations);
+
+    request.setAttribute("status_name", status);
     request.getRequestDispatcher("/WEB-INF/view/profiles.jsp").forward(request, response);
     }
+
+    @Override
+    public void doPost(HttpServletRequest request, HttpServletResponse response)
+        throws IOException, ServletException {
+      String status = request.getParameter("status_name");
+
+      String username = (String) request.getSession().getAttribute("user");
+      if (username == null) {
+        // user is not logged in, don't let them create a conversation
+        response.sendRedirect("/profiles");
+        return;
+      }
+
+      User user = userStore.getUser(username);
+      if (user == null) {
+        // user was not found, don't let them create a conversation
+        System.out.println("User not found: " + username);
+        response.sendRedirect("/profiles");
+        return;
+      }
+
+      //add status to database
+      user.setStatus(status);
+      userStore.updateUser(user);
+
+     response.sendRedirect("/profiles");
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   }

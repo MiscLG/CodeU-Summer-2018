@@ -18,6 +18,7 @@ import codeu.model.data.User;
 import codeu.model.store.persistence.PersistentStorageAgent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashMap;
 import java.util.UUID;
 
 /**
@@ -56,12 +57,19 @@ public class UserStore {
   private PersistentStorageAgent persistentStorageAgent;
 
   /** The in-memory list of Users. */
-  private List<User> users;
+  // private List<User> users;
+
+    //MAP IMPLEMETATION
+  private HashMap<String,User> usersMap;
+  private User newestUser;
 
   /** This class is a singleton, so its constructor is private. Call getInstance() instead. */
   private UserStore(PersistentStorageAgent persistentStorageAgent) {
     this.persistentStorageAgent = persistentStorageAgent;
-    users = new ArrayList<>();
+    // users = new ArrayList<>();
+
+      //MAP IMPLEMETATION
+    usersMap = new HashMap<String, User>();
   }
 
   /**
@@ -70,13 +78,21 @@ public class UserStore {
    * @return null if username does not match any existing User.
    */
   public User getUser(String username) {
+    // // This approach will be pretty slow if we have many users.
+    // for (User user : users) {
+    //   if (user.getName().equals(username)) {
+    //     return user;
+    //   }
+    // }
+    // return null;
     // This approach will be pretty slow if we have many users.
-    for (User user : users) {
-      if (user.getName().equals(username)) {
-        return user;
-      }
+
+      //MAP IMPLEMETATION
+      if (usersMap.containsKey(username)) {
+          return usersMap.get(username);
+      } else {
+          return null;
     }
-    return null;
   }
 
   /**
@@ -85,12 +101,20 @@ public class UserStore {
    * @return null if the UUID does not match any existing User.
    */
   public User getUser(UUID id) {
-    for (User user : users) {
+    // for (User user : users) {
+    //   if (user.getId().equals(id)) {
+    //     return user;
+    //   }
+    // }
+    // return null;
+
+  //MAP IMPLEMETATION
+    for (User user : usersMap.values()) {
       if (user.getId().equals(id)) {
         return user;
       }
     }
-    return null;
+      return null;
   }
 
   /**
@@ -98,7 +122,13 @@ public class UserStore {
    * to add a new user, not to update an existing user.
    */
   public void addUser(User user) {
-    users.add(user);
+    // users.add(user);
+    // persistentStorageAgent.writeThrough(user);
+
+  //MAP IMPLEMETATION
+
+    newestUser = user;
+    usersMap.put(user.getName(), user);
     persistentStorageAgent.writeThrough(user);
   }
 
@@ -111,7 +141,15 @@ public class UserStore {
 
   /** Return true if the given username is known to the application. */
   public boolean isUserRegistered(String username) {
-    for (User user : users) {
+    // for (User user : users) {
+    //   if (user.getName().equals(username)) {
+    //     return true;
+    //   }
+    // }
+    // return false;
+
+  //MAP IMPLEMETATION
+    for (User user : usersMap.values()) {
       if (user.getName().equals(username)) {
         return true;
       }
@@ -124,29 +162,51 @@ public class UserStore {
    * is loaded from Datastore.
    */
   public void setUsers(List<User> users) {
-    this.users = users;
+    // this.users = users;
+
+  //MAP IMPLEMETATION
+      //loop through all the list and add to map
+      for (User user : users) {
+        usersMap.put(user.getName(), user);
+        }
   }
-  
+
   /**
    * Gets the name of the newest user.
    */
   public String getNewestUser() {
-	  if(users.size() > 0)
-	   return this.users.get(users.size()-1).getName();
-	  return "N/A";
+	  // if(users.size() > 0)
+	  //  return this.users.get(users.size()-1).getName();
+	  // return "N/A";
+
+      //MAP IMPLEMETATION
+    if (newestUser == null ) return "N/A";
+    return newestUser.getName();
   }
-  
+
   /**
    * Gets number of users.
    */
   public int getUserCount() {
-	  return this.users.size();
+	  //return this.users.size();
+
+      //MAP IMPLEMETATION
+    return this.usersMap.size();
   }
-  
+
   /**
    * Gets list of all users.
    */
   public List<User> getUsers() {
-	  return users;
+	//  return users;
+
+  //MAP IMPLEMETATION
+   List<User> users = new ArrayList<>(); ;
+  //loop through all the list and add to map
+  for (User user : usersMap.values()) {
+    users.add(user);
+    }
+  return users;
   }
+
 }
