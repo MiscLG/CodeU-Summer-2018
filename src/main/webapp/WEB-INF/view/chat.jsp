@@ -29,6 +29,15 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
     <link rel="stylesheet" href="/css/mobile_first.css" type="text/css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="/javascript/chat.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--<script>
+    // scroll the chat div to the bottom
+    function scrollChat() {
+      var chatDiv = document.getElementById('chat');
+      chatDiv.scrollTop = chatDiv.scrollHeight;
+    };
+    </script>
+    /!-->
   </head>
   <body onload="callFunctions()">
     <nav>
@@ -71,16 +80,30 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
     <hr/>
     <div id="messageBlock">
     <% if (request.getSession().getAttribute("user") != null) { %>
-    <form id="newMessage" action="/chat/<%= conversation.getTitle() %>" method="POST">
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#submit").click(function(){
+                $.post('/chat/<%= conversation.getTitle() %>',
+                    {
+                        message: $("#message").val()
+                    },
+                        function(data,status) {
+                            // Do something with returned JSON named in "data"
+                    }
+                );
+            })
+        }) ;
+    </script>
+    <form id="newMessage"  action="/mail/<%= conversation.getTitle() %>" method="POST">
       <div id="previewBlock">
         <p id="preview">Preview:</p>
       </div>
-      <nav id="bar">
-      </nav>
-      <input type="text" id="message" name="message"  onkeyup="document.getElementById('preview').innerHTML = this.value">
-      <br/>
-      <button type="submit" id="submit">Send</button>
-      <a id="reload" href="">&#8635;</a>
+        <nav id="bar">
+        </nav>
+        <input type="text" id="message" name="message"  onkeyup="document.getElementById('preview').innerHTML = this.value">
+        <br/>
+        <button type="submit" id="submit">Send</button>
+        <a id="reload" href="">&#8635;</a>
     </form>
 
     <% } else { %>
