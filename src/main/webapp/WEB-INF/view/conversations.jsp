@@ -31,13 +31,11 @@ limitations under the License.
         <% if(request.getSession().getAttribute("user") != null){ %>
             <a href="/profiles">Profile</a>
             <a href="/conversations">Chats</a>
-            <a href="/">Logout</a>
             <% if(request.getSession().getAttribute("admin") != null) %>
                 <a href="/admin">Admin</a>
         <% } else{ %>
             <a href="/login">Login</a>
             <a href="/register">Register</a>
-            <a href="/mail">Mail</a>
         <% } %>
     </nav>
 
