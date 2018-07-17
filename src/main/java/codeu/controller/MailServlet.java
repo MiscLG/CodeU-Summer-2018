@@ -16,13 +16,9 @@
 
 package codeu.controller;
 
-import java.io.Console;
-// [START simple_includes]
+
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -31,8 +27,7 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-// [END simple_includes]
-import javax.servlet.ServletException;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse; 
@@ -40,28 +35,15 @@ import javax.servlet.http.HttpServletResponse;
 @SuppressWarnings("serial")
 public class MailServlet extends HttpServlet {
 	
-	private static final Logger logger = Logger.getLogger(MailServlet.class.getName());
-	
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    //String type = req.getParameter("type");
-
-	 
-	 String messageContent = request.getParameter("message");
+	String messageContent = request.getParameter("message");
     sendSimpleMail(messageContent);
     
     String requestUrl = request.getRequestURI();
     String conversationTitle = requestUrl.substring("/mail/".length());
-    //response.sendRedirect("/login");
     response.sendRedirect("/chat/" + conversationTitle);
   }
-  
-  /*@Override
-  public void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws IOException, ServletException {
-	logger.log(Level.INFO, "Hits Mail serverlet");
-    request.getRequestDispatcher("/mail.jsp").forward(request, response);
-}*/
 
   private void sendSimpleMail(String messageContent) {
     Properties props = new Properties();

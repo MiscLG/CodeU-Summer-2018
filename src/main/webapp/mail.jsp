@@ -22,12 +22,10 @@ limitations under the License.
     <body>
 
       <div id="container">
-        
-
         <form action="/mail" method="POST">
               <button type="submit">Test</button>
-            </form>
+        </form>
 
-          </div>
-        </body>
-      </html>
+      </div>
+    </body>
+</html>
