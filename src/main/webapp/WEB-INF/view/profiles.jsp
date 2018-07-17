@@ -52,6 +52,7 @@ limitations under the License.
             <% } else{ %>
                 <a href="/login">Login</a>
                 <a href="/register">Register</a>
+                <a href="/mail">Mail</a>
             <% } %>
         </nav>
 

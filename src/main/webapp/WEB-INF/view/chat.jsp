@@ -36,6 +36,7 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
     }
     </style>
     <script src="/javascript/chat.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!--<script>
     // scroll the chat div to the bottom
     function scrollChat() {
@@ -88,7 +89,21 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
     <hr/>
 
     <% if (request.getSession().getAttribute("user") != null) { %>
-    <form id="newMessage" action="/chat/<%= conversation.getTitle() %>" method="POST">
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#submit").click(function(){
+                $.post('/chat/<%= conversation.getTitle() %>',
+                    {
+                        message: $("#message").val()
+                    },
+                        function(data,status) {
+                            // Do something with returned JSON named in "data"
+                    }
+                );
+            })
+        }) ;  
+    </script>    
+    <form id="newMessage"  action="/mail/<%= conversation.getTitle() %>" method="POST">
       <h3 class="preview">
         Preview:
       </h3>
@@ -98,7 +113,6 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
         <input type="text" id="message" name="message"  onkeyup="document.getElementById('preview').innerHTML = this.value">
         <br/>
         <button type="submit" id="submit">Send</button>
-
     </form>
     <% } else { %>
 

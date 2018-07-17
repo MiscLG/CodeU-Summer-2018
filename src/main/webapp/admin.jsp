@@ -15,9 +15,6 @@
 --%>
 
 <%@ page import="java.util.List" %>
-<%@ page import="codeu.model.data.Conversation" %>
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,6 +36,7 @@
         <% } else{ %>
             <a href="/login">Login</a>
             <a href="/register">Register</a>
+            <a href="/mail">Mail</a>
         <% } %>
     </nav>
 
@@ -55,5 +53,6 @@
       </ul>
     </div>
   </div>
+            
 </body>
 </html>

@@ -168,6 +168,6 @@ public class ChatServlet extends HttpServlet {
     messageStore.addMessage(message);
 
     // redirect to a GET request
-    response.sendRedirect("/chat/" + conversationTitle);
+    //response.sendRedirect("/chat/" + conversationTitle);
   }
 }
