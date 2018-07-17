@@ -22,24 +22,39 @@ limitations under the License.
   <head lang="en">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <script language="JavaScript">
-
-        <!--gets the user input to be dispayed-->
-      function showInput() {
-        document.getElementById('display').innerHTML =
-        document.getElementById("user_input").value;
-      }
-      </script>
-
       <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
       <link rel="stylesheet" href="/css/main.css">
       <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
       <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
       <title>Register</title>
+
+<!--JavaScript functions-->
+      <script language="JavaScript">
+        <!--gets the user input to be dispayed-->
+      function showInput() {
+        document.getElementById('status').innerHTML =
+        document.getElementById("user_input").value;
+      }
+
+      function showPhoto(){
+      var preview = document.querySelector('img'); //selects the query named img
+      var file    = document.querySelector('input[type=file]').files[0]; //sames as here
+      var reader  = new FileReader();
+      reader.onloadend = function () {
+          preview.src = reader.result;
+      }
+      if (file) {
+          reader.readAsDataURL(file); //reads the data as a URL
+      } else {
+          preview.src = "";
+      }
+    }
+  showPhoto();
+
+      </script>
+
    </head>
-
         <body>
-
         <nav>
             <a id="navTitle" href="/">CodeU Chat App</a>
             <a href="/about.jsp">About</a>
@@ -59,13 +74,28 @@ limitations under the License.
           <div class="container">
             <div class="span3 well">
               <center>
-                <!-- not completed, but have to enable user to upload images and display on page-->
-                <a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src="https://www.gstatic.com/webp/gallery3/2.png" name="aboutme" width="140" height="140" class="img-circle"></a>
+<!---Displays profileImage //https://www.gstatic.com/webp/gallery3/2.png//-->
+                <img src="" name="profileImage" id="photo" width="160" height="160" class="img-circle">
+<!-- Displays username-->
                 <h3 style="text-transform: uppercase;" ><%= request.getSession().getAttribute("user") %></h3>
-                <em><p><span id='display'></span></p></em>
+<!-- Displays status-->
+                <em><p><span id='status'></span></p></em>
               </center>
             </div>
           </div>
+
+<!-- Uploading images-->
+          <form method="post">
+            <div>
+              <div>
+                <h4>Change Profile</h4>
+              </div>
+              <div>
+                <input type="file" id="fileUpload" name="file" onchange="showPhoto()"/>
+              </div>
+            </div>
+          </form>
+
           <!--updates status-->
           <h2 style="text-align:center;">Update Status</h2>
           <!--text field goes here-->
@@ -74,13 +104,13 @@ limitations under the License.
               <textarea placeholder="Type your status here" cols="70" rows="4" id="user_input" ></textarea>
             </div>
           </form>
+
           <br>
             <!--submit button-->
             <input type="submit" value = "Update"  onclick="showInput();" ><br/>
             <br>
 
               <h2 style="text-align:center;">Recent Conversations</h2>
-
               <!--load conversations from database and displays them-->
               <%
               List<Conversation> conversations =
