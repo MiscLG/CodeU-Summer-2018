@@ -80,7 +80,7 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
       <input type="text" id="message" name="message"  onkeyup="document.getElementById('preview').innerHTML = this.value">
       <br/>
       <button type="submit" id="submit">Send</button>
-      <a id="reload" href="" style="float: right">&#8635;</a>
+      <a id="reload" href="">&#8635;</a>
     </form>
 
     <% } else { %>
