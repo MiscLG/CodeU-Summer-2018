@@ -32,7 +32,11 @@ limitations under the License.
       </script>
 
       <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-      <link rel="stylesheet" href="/css/main.css">
+      <link rel="stylesheet" href="/css/mobile_first.css">
+      <style>
+        nav {  width:100%;  }
+        nav a:hover {  text-decoration:none;  color:white;  }
+      </style>
       <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
       <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
       <title>Register</title>

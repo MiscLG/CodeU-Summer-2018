@@ -18,18 +18,17 @@ limitations under the License.
   <head>
     <title>Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/mobile_first.css">
     </head>
     <body>
-
     <nav>
         <a id="navTitle" href="/">CodeU Chat App</a>
         <a href="/about.jsp">About</a>
         <% if(request.getSession().getAttribute("user") != null){ %>
             <a href="/profiles">Profile</a>
-            <a href="/conversations">Conversations</a>
+            <a href="/conversations">Chats</a>
             <a href="/">Logout</a>
-            <% if(request.getSession().getAttribute("admin") != null) %>    
+            <% if(request.getSession().getAttribute("admin") != null) %>
                 <a href="/admin">Admin</a>
         <% } else{ %>
             <a href="/login">Login</a>
