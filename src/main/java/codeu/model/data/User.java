@@ -14,6 +14,10 @@
 
 package codeu.model.data;
 
+import com.google.appengine.api.blobstore.BlobKey;
+import com.google.appengine.api.blobstore.BlobstoreService;
+import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
+
 import java.time.Instant;
 import java.util.UUID;
 
@@ -21,6 +25,8 @@ import java.util.UUID;
 public class User {
   private final UUID id;
   private final String name;
+  private String status;
+  private String blobKey;
   private final String passwordHash;
   private final Instant creation;
 
@@ -29,9 +35,13 @@ public class User {
    *
    * @param id the ID of this User
    * @param name the username of this User
+    * @param status the status of this User
    * @param passwordHash the password hash of this User
    * @param creation the creation time of this User
+   * @param blobKey the BlobKeyof this User
    */
+
+
   public User(UUID id, String name, String passwordHash, Instant creation) {
     this.id = id;
     this.name = name;
@@ -42,6 +52,25 @@ public class User {
   /** Returns the ID of this User. */
   public UUID getId() {
     return id;
+  }
+  /** Returns the BlobKey of this User. */
+  public String getBlobKey() {
+    return blobKey;
+  }
+
+  /** sets the BlobKey of this User. */
+  public void setStatus(String value) {
+     status = value;
+  }
+
+  /** Returns the BlobKey of this User. */
+  public String getStatus() {
+    return status;
+  }
+
+  /** sets the BlobKey of this User. */
+  public void setBlobKey(String key) {
+     blobKey = key;
   }
 
   /** Returns the username of this User. */
