@@ -110,7 +110,7 @@ input[type="text"],input[type="password"] {
   }
   #reload{
     float:left;
-    font-size:24px;
+    font-size:16pt;
     position:fixed;
     left: 0%;
     bottom:0%;
@@ -126,7 +126,7 @@ input[type="text"],input[type="password"] {
     margin: 0;
     font-family: sans-serif;
     line-height: 1.6;
-    font-size: 18px;
+    font-size: 14pt;
     line-height: 1.6;
     color: #444;
     background-color: #eeeeee;
@@ -141,13 +141,13 @@ input[type="text"],input[type="password"] {
   nav a {
     color: white;
     display: inline-block;
-    font-size: 24px;
+    font-size: 22pt;
     text-decoration: none;
     width:auto;
   }
 
   #navTitle {
-    font-size: 36px;
+    font-size: 36pt;
     width:auto;
   }
 
@@ -173,11 +173,14 @@ input[type="text"],input[type="password"] {
   }
 
   input {
-    font-size: 18px;
+    font-size: 16pt;
   }
 
   button {
-    font-size: 18px;
+    font-size: 16pt;
+  }
+  #reload {
+    font-size: 19.45pt;
   }
   #message {
     width: 796px ;
