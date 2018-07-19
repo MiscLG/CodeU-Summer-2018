@@ -30,6 +30,7 @@
         <% if(request.getSession().getAttribute("user") != null){ %>
             <a href="/profiles">Profile</a>
             <a href="/conversations">Chats</a>
+            <a href="/login?logout=true" >Logout</a>
             <% if(request.getSession().getAttribute("admin") != null) %>
                 <a href="/admin">Admin</a>
         <% } else{ %>
@@ -51,6 +52,6 @@
       </ul>
     </div>
   </div>
-            
+
 </body>
 </html>
