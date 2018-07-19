@@ -41,7 +41,6 @@ public class Upload extends HttpServlet {
       this.userStore = userStore;
     }
 
-
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse res)
         throws ServletException, IOException {
@@ -69,7 +68,6 @@ public class Upload extends HttpServlet {
             //get BlobKey instance and save it.
           user.setBlobKey(blobKeys.get(0).getKeyString());
           userStore.updateUser(user);
-
           res.sendRedirect("/profiles");
         }
     }

@@ -56,8 +56,6 @@ public class UserStore {
    */
   private PersistentStorageAgent persistentStorageAgent;
 
-  /** The in-memory list of Users. */
-  // private List<User> users;
 
     //MAP IMPLEMETATION
   private HashMap<String,User> usersMap;
@@ -66,7 +64,7 @@ public class UserStore {
   /** This class is a singleton, so its constructor is private. Call getInstance() instead. */
   private UserStore(PersistentStorageAgent persistentStorageAgent) {
     this.persistentStorageAgent = persistentStorageAgent;
-    // users = new ArrayList<>();
+  
 
       //MAP IMPLEMETATION
     usersMap = new HashMap<String, User>();
@@ -78,14 +76,6 @@ public class UserStore {
    * @return null if username does not match any existing User.
    */
   public User getUser(String username) {
-    // // This approach will be pretty slow if we have many users.
-    // for (User user : users) {
-    //   if (user.getName().equals(username)) {
-    //     return user;
-    //   }
-    // }
-    // return null;
-    // This approach will be pretty slow if we have many users.
 
       //MAP IMPLEMETATION
       if (usersMap.containsKey(username)) {
@@ -101,13 +91,7 @@ public class UserStore {
    * @return null if the UUID does not match any existing User.
    */
   public User getUser(UUID id) {
-    // for (User user : users) {
-    //   if (user.getId().equals(id)) {
-    //     return user;
-    //   }
-    // }
-    // return null;
-
+  
   //MAP IMPLEMETATION
     for (User user : usersMap.values()) {
       if (user.getId().equals(id)) {
@@ -122,9 +106,7 @@ public class UserStore {
    * to add a new user, not to update an existing user.
    */
   public void addUser(User user) {
-    // users.add(user);
-    // persistentStorageAgent.writeThrough(user);
-
+  
   //MAP IMPLEMETATION
 
     newestUser = user;
@@ -137,17 +119,11 @@ public class UserStore {
    */
   public void updateUser(User user) {
     persistentStorageAgent.writeThrough(user);
-    usersMap.put(user.getName(), user);
   }
 
   /** Return true if the given username is known to the application. */
   public boolean isUserRegistered(String username) {
-    // for (User user : users) {
-    //   if (user.getName().equals(username)) {
-    //     return true;
-    //   }
-    // }
-    // return false;
+  
 
   //MAP IMPLEMETATION
     for (User user : usersMap.values()) {
@@ -163,8 +139,6 @@ public class UserStore {
    * is loaded from Datastore.
    */
   public void setUsers(List<User> users) {
-    // this.users = users;
-
   //MAP IMPLEMETATION
       //loop through all the list and add to map
       for (User user : users) {
