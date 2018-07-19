@@ -31,7 +31,7 @@ limitations under the License.
     <% } %>
         <a href="/profiles">Profile</a>
         <a href="/conversations">Chats</a>
-        <a href="/">Logout</a>
+        <a href="/login?logout=true" >Logout</a>
         <a href="/about.jsp">About</a>
         <% } else{ %>
         <a href="/login">Login</a>
