@@ -23,6 +23,25 @@ public class Upload extends HttpServlet {
     /** Store class that gives access to Users. */
     private UserStore userStore;
 
+    /**
+     * Set up state for handling conversation-related requests. This method is only called when
+     * running in a server, not when running in a test.
+     */
+    @Override
+    public void init() throws ServletException {
+      super.init();
+      setUserStore(UserStore.getInstance());
+    }
+
+    /**
+     * Sets the UserStore used by this servlet. This function provides a common setup method for use
+     * by the test framework or the servlet's init() function.
+     */
+    void setUserStore(UserStore userStore) {
+      this.userStore = userStore;
+    }
+
+
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse res)
         throws ServletException, IOException {
@@ -50,6 +69,8 @@ public class Upload extends HttpServlet {
             //get BlobKey instance and save it.
           user.setBlobKey(blobKeys.get(0).getKeyString());
           userStore.updateUser(user);
+
+          res.sendRedirect("/profiles");
         }
     }
 }

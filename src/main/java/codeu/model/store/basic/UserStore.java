@@ -61,7 +61,7 @@ public class UserStore {
 
     //MAP IMPLEMETATION
   private HashMap<String,User> usersMap;
-  private User newestUser;
+  private User newestUser = null;
 
   /** This class is a singleton, so its constructor is private. Call getInstance() instead. */
   private UserStore(PersistentStorageAgent persistentStorageAgent) {
@@ -137,6 +137,7 @@ public class UserStore {
    */
   public void updateUser(User user) {
     persistentStorageAgent.writeThrough(user);
+    usersMap.put(user.getName(), user);
   }
 
   /** Return true if the given username is known to the application. */

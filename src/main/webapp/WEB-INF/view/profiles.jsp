@@ -41,6 +41,9 @@ limitations under the License.
       function showInput() {
         document.getElementById('status').innerHTML =
         document.getElementById("status_name").value;
+
+        document.getElementById("status").submit();
+        document.getElementById("status_name").submit();
       }
 
       function showPhoto(){
@@ -108,7 +111,7 @@ if (status == null) {
                 <h4 style="text-align:center;">Change Profile</h4>
               </div>
               <div style="text-align: center;">
-                <input type="file" id="fileUpload" name="myFile" onchange="showPhoto()"/>
+                <input type="file" id="fileUpload" name="myFile" onchange="this.form.submit(); showPhoto()"/>
               </div>
             </div>
           </form>
@@ -117,7 +120,7 @@ if (status == null) {
           <!--updates status-->
           <h2 style="text-align:center;">Update Status</h2>
           <!--text field goes here-->
-          <form>
+          <form action="/profiles" method="POST">
             <div align = "center" margin-left:auto; margin-right:auto;>
               <textarea name = "status_name" placeholder="Type your status here" cols="70" rows="4" id="status_name" ></textarea>
             </div>
@@ -126,7 +129,7 @@ if (status == null) {
           <br>
             <!--submit button-->
             <div style="text-align: center;">
-            <input type="submit" value = "Update"  onclick="showInput();" ><br/>
+            <input type="submit" value = "Update" onclick="showInput()" ><br/>
           </div>
             <br>
 
