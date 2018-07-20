@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.mindrot.jbcrypt.BCrypt;
-import org.mortbay.log.Log;
 
 import codeu.model.data.User;
 import codeu.model.store.basic.UserStore;

@@ -86,7 +86,7 @@ public class MailServlet extends HttpServlet {
       msg.setFrom(new InternetAddress("lriffle@codeustudents.com"));
       msg.addRecipient(Message.RecipientType.TO,
                        new InternetAddress(phoneNumber));
-      msg.setSubject(username + ": ");
+      msg.setSubject(username + " ");
       msg.setText(messageContent);
       Transport.send(msg);
     } catch (AddressException e) {
