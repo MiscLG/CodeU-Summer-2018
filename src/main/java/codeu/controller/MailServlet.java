@@ -41,9 +41,6 @@ import codeu.model.store.basic.UserStore;
 public class MailServlet extends HttpServlet {
 
   private static final Logger logger = Logger.getLogger(MailServlet.class.getName());
-
-
-
 	
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {

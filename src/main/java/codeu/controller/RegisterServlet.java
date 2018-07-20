@@ -19,8 +19,7 @@ public class RegisterServlet extends HttpServlet {
 
   /** Store class that gives access to Users. */
   private UserStore userStore;
-  private static final Logger logger = Logger.getLogger(MailServlet.class.getName());
-
+  
   /**
    * Set up state for handling registration-related requests. This method is only called when
    * running in a server, not when running in a test.
@@ -68,16 +67,12 @@ public class RegisterServlet extends HttpServlet {
     
     String phoneNumber = null;
     
-    logger.info(request.getParameter("phone"));
-    logger.info(request.getParameter("carriers"));
-    
-    
     if(true/*VALIDATE*/) {
     	phoneNumber = createNumber(request.getParameter("phone"), request.getParameter("carriers"));
     }
 
-    
-    User user = new User(UUID.randomUUID(), username, hashedPassword, Instant.now(), phoneNumber);
+    User user = new User(UUID.randomUUID(), username, hashedPassword, Instant.now());
+    user.setPhoneNumber(phoneNumber);
     userStore.addUser(user);
 
     response.sendRedirect("/login");

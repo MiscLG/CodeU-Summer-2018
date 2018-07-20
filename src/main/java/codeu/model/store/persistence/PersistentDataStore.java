@@ -69,7 +69,7 @@ public class PersistentDataStore {
         String passwordHash = (String) entity.getProperty("password_hash");
         Instant creationTime = Instant.parse((String) entity.getProperty("creation_time"));
         String phoneNumber = (String) entity.getProperty("phoneNumber");
-        User user = new User(uuid, userName, passwordHash, creationTime, phoneNumber);
+        User user = new User(uuid, userName, passwordHash, creationTime);
         users.add(user);
       } catch (Exception e) {
         // In a production environment, errors should be very rare. Errors which may
