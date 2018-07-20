@@ -25,22 +25,19 @@ limitations under the License.
 
       <nav>
         <a id="navTitle" href="/">CodeU Chat App</a>
+        <a href="/about.jsp">About</a>
         <% if(request.getSession().getAttribute("user") != null){ %>
-        <% if(request.getSession().getAttribute("admin") != null){ %>
-        <a href="/admin">Admin</a>
-    <% } %>
-        <a href="/profiles">Profile</a>
-        <a href="/conversations">Chats</a>
-        <a href="/login?logout=true" >Logout</a>
-        <a href="/about.jsp">About</a>
+            <% if(request.getSession().getAttribute("admin") != null){ %>
+                <a href="/admin">Admin</a>
+            <% } %>
+            <a href="/profiles">Profile</a>
+            <a href="/conversations">Chats</a>
+            <a href="/login?logout=true" >Logout</a>
         <% } else{ %>
-        <a href="/login">Login</a>
-        <a href="/register">Register</a>
-        <a href="/about.jsp">About</a>
-        <a href="/mail">Mail</a>
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
         <% } %>
-
-      </nav>
+    </nav>
 
       <div id="container">
         <div
