@@ -23,6 +23,7 @@ public class User {
   private final String name;
   private final String passwordHash;
   private final Instant creation;
+  private String phoneNumber;
 
   /**
    * Constructs a new User.
@@ -31,12 +32,14 @@ public class User {
    * @param name the username of this User
    * @param passwordHash the password hash of this User
    * @param creation the creation time of this User
+   * @param phoneNumber the phoneNumber of this User
    */
-  public User(UUID id, String name, String passwordHash, Instant creation) {
+  public User(UUID id, String name, String passwordHash, Instant creation, String phoneNumber) {
     this.id = id;
     this.name = name;
     this.passwordHash = passwordHash;
     this.creation = creation;
+    this.phoneNumber = phoneNumber;
   }
 
   /** Returns the ID of this User. */
@@ -57,5 +60,10 @@ public class User {
   /** Returns the creation time of this User. */
   public Instant getCreationTime() {
     return creation;
+  }
+  
+  /** Returns the phoneNumber of this User. */
+  public String getPhoneNumber() {
+    return phoneNumber;
   }
 }
