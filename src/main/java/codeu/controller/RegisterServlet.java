@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.mindrot.jbcrypt.BCrypt;
-import org.mortbay.log.Log;
 
 import codeu.model.data.User;
 import codeu.model.store.basic.UserStore;
@@ -20,7 +19,6 @@ public class RegisterServlet extends HttpServlet {
 
   /** Store class that gives access to Users. */
   private UserStore userStore;
-  private static final Logger logger = Logger.getLogger(MailServlet.class.getName());
 
   /**
    * Set up state for handling registration-related requests. This method is only called when
@@ -69,16 +67,12 @@ public class RegisterServlet extends HttpServlet {
     
     String phoneNumber = null;
     
-    logger.info(request.getParameter("phone"));
-    logger.info(request.getParameter("carriers"));
-    
-    
     if(true/*VALIDATE*/) {
     	phoneNumber = createNumber(request.getParameter("phone"), request.getParameter("carriers"));
     }
-
     
-    User user = new User(UUID.randomUUID(), username, hashedPassword, Instant.now(), phoneNumber);
+    User user = new User(UUID.randomUUID(), username, hashedPassword, Instant.now());
+    user.setPhoneNumber(phoneNumber);
     userStore.addUser(user);
 
     response.sendRedirect("/login");
