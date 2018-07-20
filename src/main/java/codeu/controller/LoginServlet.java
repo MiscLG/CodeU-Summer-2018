@@ -89,6 +89,7 @@ public class LoginServlet extends HttpServlet {
     }
 
     request.getSession().setAttribute("user", username);
+    request.getSession().setAttribute("phoneNumber", user.getPhoneNumber());
 
     if(username.equals("lriffle") || username.equals("MiscLG") ||
        username.equals("tbiscuit") || username.equals("arafatm") || username.equals("test")) {

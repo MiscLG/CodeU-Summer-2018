@@ -3,6 +3,7 @@ package codeu.controller;
 import java.io.IOException;
 import java.time.Instant;
 import java.util.UUID;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +19,7 @@ public class RegisterServlet extends HttpServlet {
 
   /** Store class that gives access to Users. */
   private UserStore userStore;
-
+  
   /**
    * Set up state for handling registration-related requests. This method is only called when
    * running in a server, not when running in a test.
@@ -63,10 +64,28 @@ public class RegisterServlet extends HttpServlet {
 
     String password = request.getParameter("password");
     String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+    
+    String phoneNumber = null;
+    
+    if(true/*VALIDATE*/) {
+    	phoneNumber = createNumber(request.getParameter("phone"), request.getParameter("carriers"));
+    }
 
     User user = new User(UUID.randomUUID(), username, hashedPassword, Instant.now());
+    user.setPhoneNumber(phoneNumber);
     userStore.addUser(user);
 
     response.sendRedirect("/login");
+  }
+  
+  private String createNumber(String phone, String carrier) {
+	  String phoneNumber = phone;
+	  if(carrier.equals("Verizon")) phoneNumber += "@vtext.com";
+	  else if(carrier.equals("AT&T")) phoneNumber += "@txt.att.net";
+	  else if(carrier.equals("T-Mobile")) phoneNumber += "@tmomail.net";
+	  else if(carrier.equals("Sprint")) phoneNumber += "@messaging.sprintpcs.com";
+	  else if(carrier.equals("Virgin-Mobile")) phoneNumber += "@vmobl.com";
+	  else phoneNumber = null;
+	  return phoneNumber;
   }
 }

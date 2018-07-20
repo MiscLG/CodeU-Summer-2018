@@ -79,8 +79,8 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
 
     <hr/>
     <div id="messageBlock">
-    <% if (request.getSession().getAttribute("user") != null) { %>
-    <script type="text/javascript">
+    <% if (request.getSession().getAttribute("user") != null ) { %>
+        <script type="text/javascript">
         $(document).ready(function(){
             $("#submit").click(function(){
                 $.post('/chat/<%= conversation.getTitle() %>',
@@ -92,8 +92,10 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
                     }
                 );
             })
+
         }) ;
     </script>
+
     <form id="newMessage"  action="/mail/<%= conversation.getTitle() %>" method="POST">
       <div id="previewBlock">
         <p id="preview">Preview:</p>
