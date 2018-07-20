@@ -29,8 +29,7 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
     <link rel="stylesheet" href="/css/mobile_first.css" type="text/css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="/javascript/chat.js"></script>
-<<<<<<< HEAD
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!--<script>
     // scroll the chat div to the bottom
     function scrollChat() {
@@ -39,8 +38,6 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
     };
     </script>
     /!-->
-=======
->>>>>>> fixes css bug on profile.jsp
   </head>
   <body onload="callFunctions()">
     <nav>
@@ -81,7 +78,6 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
     <hr/>
 
     <hr/>
-
     <div id="messageBlock">
     <% if (request.getSession().getAttribute("user") != null ) { %>
         <script type="text/javascript">
@@ -96,31 +92,20 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
                     }
                 );
             })
-        }) ;  
-        </script>  
+
+        }) ;
+    </script>
+
     <form id="newMessage"  action="/mail/<%= conversation.getTitle() %>" method="POST">
       <div id="previewBlock">
         <p id="preview">Preview:</p>
       </div>
-<<<<<<< HEAD
-        <p class="preview" id="preview"></p>
         <nav id="bar">
         </nav>
         <input type="text" id="message" name="message"  onkeyup="document.getElementById('preview').innerHTML = this.value">
         <br/>
         <button type="submit" id="submit">Send</button>
-=======
-      <nav id="bar">
-      </nav>
-      <input type="text" id="message" name="message"  onkeyup="document.getElementById('preview').innerHTML = this.value">
-      <br/>
-      <button type="submit" id="submit">Send</button>
-<<<<<<< HEAD
-      <a id="reload" href="" style="float: right">&#8635;</a>
->>>>>>> changes position of reload button
-=======
-      <a id="reload" href="">&#8635;</a>
->>>>>>> corrects version in pom.xml
+        <a id="reload" href="">&#8635;</a>
     </form>
 
     <% } else { %>

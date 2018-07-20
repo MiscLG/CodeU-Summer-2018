@@ -41,9 +41,6 @@ import codeu.model.store.basic.UserStore;
 public class MailServlet extends HttpServlet {
 
   private static final Logger logger = Logger.getLogger(MailServlet.class.getName());
-
-
-
 	
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -86,7 +83,7 @@ public class MailServlet extends HttpServlet {
       msg.setFrom(new InternetAddress("lriffle@codeustudents.com"));
       msg.addRecipient(Message.RecipientType.TO,
                        new InternetAddress(phoneNumber));
-      msg.setSubject(username + ": ");
+      msg.setSubject(username + " ");
       msg.setText(messageContent);
       Transport.send(msg);
     } catch (AddressException e) {
