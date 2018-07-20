@@ -68,7 +68,7 @@ public class MailServlet extends HttpServlet {
 	
 	logger.info("MailClass: " + phoneNumber);
     
-	if(user.getPhoneNumber() != null && textNotifications.equals("On")) {
+	if(user.getPhoneNumber() != null && textNotifications != null) {
 		sendSimpleMail(messageContent, phoneNumber, username);
 	}
 	

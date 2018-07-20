@@ -96,7 +96,7 @@ limitations under the License.
               }
               else{
                 %>
-                <ul class="mdl-list">
+                <ul class="mdl-list" style="text-align:center;">
                   <%
                   for(Conversation conversation : conversations){
                     %>
