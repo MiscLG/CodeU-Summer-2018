@@ -19,11 +19,7 @@ public class RegisterServlet extends HttpServlet {
 
   /** Store class that gives access to Users. */
   private UserStore userStore;
-<<<<<<< HEAD
 
-=======
-  
->>>>>>> e31cb63aa2191b3901e7f01a6d9b60d90db0768e
   /**
    * Set up state for handling registration-related requests. This method is only called when
    * running in a server, not when running in a test.

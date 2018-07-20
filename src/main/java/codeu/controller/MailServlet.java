@@ -45,6 +45,9 @@ public class MailServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 	String messageContent = request.getParameter("message");
+	String textNotifications = request.getParameter("texts");
+	
+	logger.info("MailClass: " + textNotifications);
 	
 	String username = (String) request.getSession().getAttribute("user");
     if (username == null) {
@@ -65,7 +68,7 @@ public class MailServlet extends HttpServlet {
 	
 	logger.info("MailClass: " + phoneNumber);
     
-	if(user.getPhoneNumber() != null) {
+	if(user.getPhoneNumber() != null && textNotifications.equals("On")) {
 		sendSimpleMail(messageContent, phoneNumber, username);
 	}
 	
