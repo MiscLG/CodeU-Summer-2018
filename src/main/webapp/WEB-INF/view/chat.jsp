@@ -29,7 +29,7 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
     <link rel="stylesheet" href="/css/mobile_first.css" type="text/css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="/javascript/chat.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!--<script>
     // scroll the chat div to the bottom
     function scrollChat() {
@@ -78,7 +78,6 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
     <hr/>
 
     <hr/>
-
     <div id="messageBlock">
     <% if (request.getSession().getAttribute("user") != null ) { %>
         <script type="text/javascript">
@@ -93,8 +92,10 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
                     }
                 );
             })
-        }) ;  
-        </script>  
+
+        }) ;
+    </script>
+
     <form id="newMessage"  action="/mail/<%= conversation.getTitle() %>" method="POST">
       <div id="previewBlock">
         <p id="preview">Preview:</p>
