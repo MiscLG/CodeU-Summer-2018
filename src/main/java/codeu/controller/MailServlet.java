@@ -34,17 +34,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.jsoup.Jsoup;
+import org.jsoup.safety.Whitelist;
+
 import codeu.model.data.User;
+import codeu.model.store.basic.ConversationStore;
+import codeu.model.store.basic.MessageStore;
 import codeu.model.store.basic.UserStore; 
 
 @SuppressWarnings("serial")
 public class MailServlet extends HttpServlet {
 
   private static final Logger logger = Logger.getLogger(MailServlet.class.getName());
+ 
 	
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 	String messageContent = request.getParameter("message");
+	String textNotifications = request.getParameter("texts");
+	
+	logger.info("MailClass: " + textNotifications);
 	
 	String username = (String) request.getSession().getAttribute("user");
     if (username == null) {
@@ -65,7 +74,7 @@ public class MailServlet extends HttpServlet {
 	
 	logger.info("MailClass: " + phoneNumber);
     
-	if(user.getPhoneNumber() != null) {
+	if(user.getPhoneNumber() != null && textNotifications != null) {
 		sendSimpleMail(messageContent, phoneNumber, username);
 	}
 	
@@ -84,7 +93,7 @@ public class MailServlet extends HttpServlet {
       msg.addRecipient(Message.RecipientType.TO,
                        new InternetAddress(phoneNumber));
       msg.setSubject(username + " ");
-      msg.setText(messageContent);
+      msg.setText(Jsoup.clean(messageContent, Whitelist.none()));
       Transport.send(msg);
     } catch (AddressException e) {
       // ...

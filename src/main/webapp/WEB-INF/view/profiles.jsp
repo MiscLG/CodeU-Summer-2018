@@ -132,7 +132,7 @@ if (status == null) {
           <!--text field goes here-->
           <form action="/profiles" method="POST">
             <div align = "center" margin-left:auto; margin-right:auto;>
-              <textarea name = "status_name" placeholder="Type your status here" cols="70" rows="4" id="status_name" ></textarea>
+              <textarea placeholder="Type your status here" cols="45" rows="4" id="user_input" ></textarea>
             </div>
           </form>
 
@@ -142,7 +142,41 @@ if (status == null) {
             <input type="submit" value = "Update" onclick="showInput()" ><br/>
           </div>
             <br>
-
+            </br>
+                
+            <% if(request.getSession().getAttribute("phoneNumber") != null) { 
+                String number = (String) request.getSession().getAttribute("phoneNumber"); %>
+                <h3>Phone: <%= number.substring(0,10) %> </h3>
+            <%
+            }
+            else { %> 
+                <h3>PhoneNumber: N/A </h3>
+            <%
+            }
+            %>
+            <br/>
+                
+            <form action="/profiles" method="POST">
+              <label for="phone" style="text-align:center;" width = 50% >Change Phone Number (No dashes/spaces): </h2>
+              <input type="text" name="phone" id="phone"> 
+              <br/> 
+              <label for="carriersList" style="text-align:center;" width = 50% >Change Carrier: </h2>
+              <br/>
+              <input list="carriersList" name="carriers" id="carriers" >
+                  <datalist id="carriersList">
+                    <option value="Verizon">
+                    <option value="AT&T">
+                    <option value="T-Mobile">
+                    <option value="Sprint">
+                    <option value="Virgin-Mobile">
+                    <option value="Other">
+                  </datalist>
+              <br/>
+              <br/>
+              <input type="submit" value = "Save">
+            </form>
+              <br/>
+              <br/>
               <h2 style="text-align:center;">Recent Conversations</h2>
               <!--load conversations from database and displays them-->
               <%
@@ -154,7 +188,7 @@ if (status == null) {
                 <%
               }else{
                 %>
-                <ul class="mdl-list">
+                <ul class="mdl-list" >
                   <%
                   for(Conversation conversation : conversations){
                     %>

@@ -93,34 +93,46 @@ public class ProfileServlet extends HttpServlet {
     request.getRequestDispatcher("/WEB-INF/view/profiles.jsp").forward(request, response);
     }
 
-    @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response)
-        throws IOException, ServletException {
+  /**
+   * This function sets the user phone number
+   */
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response)
+      throws IOException, ServletException {
+	  
+	  String phoneNumber = null;
+	  phoneNumber = RegisterServlet.createNumber(request.getParameter("phone"), request.getParameter("carriers"));
+	  
+	  String username = (String) request.getSession().getAttribute("user");
+	  if (username == null) {
+	        // user is not logged in, go back to profile
+	        response.sendRedirect("/profiles");
+	        return;
+	      }
 
-      String username = (String) request.getSession().getAttribute("user");
-      if (username == null) {
-        // user is not logged in, go back to profile
-        response.sendRedirect("/profiles");
-        return;
-      }
+	  User user = UserStore.getInstance().getUser(username);
+	  if (user == null) {
+	         // user is not logged in, go back to profile
+	        System.out.println("User not found line 112: " + username);
+	        response.sendRedirect("/profiles");
+	        return;
+	      }
+	  user.setPhoneNumber(phoneNumber);
+	  userStore.addUser(user);
+	  
+	  if(phoneNumber != null) {
+	    	request.getSession().setAttribute("phoneNumber", phoneNumber);
+	    }
 
-      User user = userStore.getUser(username);
-      if (user == null) {
-         // user is not logged in, go back to profile
-        System.out.println("User not found line 112: " + username);
-        response.sendRedirect("/profiles");
-        return;
-      }
 
       //add status to database
       String status = (String) request.getParameter("status_name");
       if (status == null) {
         System.out.println("User STATUS: " + status);
       }
-
-      System.out.println("User to be stored: " + status);
+  
       user.setStatus(status);
-      userStore.addUser(user);
       response.sendRedirect("/profiles");
     }
   }
+  
