@@ -82,18 +82,14 @@ public class ProfileServlet extends HttpServlet {
       throws IOException, ServletException {
 	  
 	  String phoneNumber = null;
-	  if(true /*!phoneNumber.matches("^\d{10}$")*/) {
-	    	request.setAttribute("error", "Phone number can't have dashes or space and must be 10 digits");	
-	    }
-	    else{
-	    	phoneNumber = RegisterServlet.createNumber(request.getParameter("phone"), request.getParameter("carriers"));
-	    }  
-	    String username = (String) request.getSession().getAttribute("user");
-	    User user = UserStore.getInstance().getUser(username);
-	  	user.setPhoneNumber(phoneNumber);
-	    userStore.addUser(user);
+	    	//request.setAttribute("error", "Phone number can't have dashes or space and must be 10 digits");	
+	  phoneNumber = RegisterServlet.createNumber(request.getParameter("phone"), request.getParameter("carriers"));
+	  String username = (String) request.getSession().getAttribute("user");
+	  User user = UserStore.getInstance().getUser(username);
+	  user.setPhoneNumber(phoneNumber);
+	  userStore.addUser(user);
 
-	    response.sendRedirect("/profiles");
+	  response.sendRedirect("/profiles");
     }
   }
   

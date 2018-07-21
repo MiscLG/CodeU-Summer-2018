@@ -66,7 +66,6 @@ public class RegisterServlet extends HttpServlet {
     String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
     
     String phoneNumber = null;
-    
     /*!phoneNumber.matches("^\d{10}$")*/
     
     phoneNumber = createNumber(request.getParameter("phone"), request.getParameter("carriers"));

@@ -84,6 +84,18 @@ limitations under the License.
             <br>
             </br>
                 
+            <% if(request.getSession().getAttribute("phoneNumber") != null) { 
+                String number = (String) request.getSession().getAttribute("phoneNumber"); %>
+                <h3>Phone: <% number.substring(0, 10); %> </h3>
+            <%
+            }
+            else { %> 
+                <h3>PhoneNumber: N/A </h3>
+            <%
+            }
+            %>
+            <br/>
+                
             <form action="/profiles" method="POST">
               <label for="phone" style="text-align:center;" width = 50% >Change Phone Number (No dashes/spaces): </h2>
               <input type="text" name="phone" id="phone"> 
