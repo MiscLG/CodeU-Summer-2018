@@ -68,6 +68,13 @@ limitations under the License.
       <style>
         nav {  width:100%;  }
         nav a:hover {  text-decoration:none;  color:white;  }
+      	ul {padding:0; margin-right:auto; margin-left:auto;
+            list-style-type:none; width:50%;}
+        li {width:100%; text-align:center;
+            background-color:white; margin-top:1%;}
+        @media screen and (min-width: 769px){
+          textarea {width:75%;}
+        }
       </style>
       <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
       <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
