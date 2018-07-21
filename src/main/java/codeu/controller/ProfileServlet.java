@@ -83,15 +83,36 @@ public class ProfileServlet extends HttpServlet {
 	  
 	  String phoneNumber = null;
 	  phoneNumber = RegisterServlet.createNumber(request.getParameter("phone"), request.getParameter("carriers"));
+	  
 	  String username = (String) request.getSession().getAttribute("user");
+	  if (username == null) {
+	        // user is not logged in, go back to profile
+	        response.sendRedirect("/profiles");
+	        return;
+	      }
+
 	  User user = UserStore.getInstance().getUser(username);
+	  if (user == null) {
+	         // user is not logged in, go back to profile
+	        System.out.println("User not found line 112: " + username);
+	        response.sendRedirect("/profiles");
+	        return;
+	      }
 	  user.setPhoneNumber(phoneNumber);
 	  userStore.addUser(user);
+	  
 	  if(phoneNumber != null) {
 	    	request.getSession().setAttribute("phoneNumber", phoneNumber);
 	    }
 
-	  response.sendRedirect("/profiles");
+      //add status to database
+      String status = (String) request.getParameter("status_name");
+      if (status == null) {
+        System.out.println("User STATUS: " + status);
+      }
+
+      user.setStatus(status);
+      response.sendRedirect("/profiles");
     }
   }
   
