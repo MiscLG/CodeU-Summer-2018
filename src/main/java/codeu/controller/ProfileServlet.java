@@ -83,9 +83,7 @@ public class ProfileServlet extends HttpServlet {
     }
 
     request.setAttribute("conversations", conversations);
-
     String status = user.getStatus();
-
     System.out.println("User RELOADED STATUS: " + status);
     if (status != null)
     request.setAttribute("status_name", status);
@@ -123,25 +121,4 @@ public class ProfileServlet extends HttpServlet {
       userStore.addUser(user);
       response.sendRedirect("/profiles");
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   }
