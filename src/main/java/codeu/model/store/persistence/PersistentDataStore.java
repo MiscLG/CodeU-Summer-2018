@@ -76,6 +76,9 @@ public class PersistentDataStore {
         String phoneNumber = (String) entity.getProperty("phoneNumber");
         User user = new User(uuid, userName, passwordHash, creationTime);
 
+        user.setPhoneNumber(phoneNumber);
+
+
         if (status != null && !status.isEmpty()) {
           user.setStatus(status);
         }
