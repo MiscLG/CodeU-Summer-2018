@@ -71,9 +71,28 @@ public class ProfileServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws IOException, ServletException {
     List<Conversation> conversations = conversationStore.getAllConversations();
+    String username = (String)request.getSession().getAttribute("user");
+
+    User user = userStore.getUser(username);
+
+    if (user == null) {
+      // user was not found, don't let them create a conversation
+      System.out.println("User not found:line 80  " + username);
+      response.sendRedirect("/profiles");
+      return;
+    }
+
     request.setAttribute("conversations", conversations);
+
+    String status = user.getStatus();
+
+    System.out.println("User RELOADED STATUS: " + status);
+    if (status != null)
+    request.setAttribute("status_name", status);
+
     request.getRequestDispatcher("/WEB-INF/view/profiles.jsp").forward(request, response);
     }
+
   /**
    * This function sets the user phone number
    */
@@ -105,12 +124,13 @@ public class ProfileServlet extends HttpServlet {
 	    	request.getSession().setAttribute("phoneNumber", phoneNumber);
 	    }
 
+
       //add status to database
       String status = (String) request.getParameter("status_name");
       if (status == null) {
         System.out.println("User STATUS: " + status);
       }
-
+  
       user.setStatus(status);
       response.sendRedirect("/profiles");
     }
