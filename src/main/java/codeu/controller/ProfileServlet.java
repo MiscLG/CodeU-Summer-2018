@@ -71,7 +71,56 @@ public class ProfileServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws IOException, ServletException {
     List<Conversation> conversations = conversationStore.getAllConversations();
+    String username = (String)request.getSession().getAttribute("user");
+
+    User user = userStore.getUser(username);
+
+    if (user == null) {
+      // user was not found, don't let them create a conversation
+      System.out.println("User not found:line 80  " + username);
+      response.sendRedirect("/profiles");
+      return;
+    }
+
     request.setAttribute("conversations", conversations);
+
+    String status = user.getStatus();
+
+    System.out.println("User RELOADED STATUS: " + status);
+    if (status != null)
+    request.setAttribute("status_name", status);
+
     request.getRequestDispatcher("/WEB-INF/view/profiles.jsp").forward(request, response);
+    }
+
+    @Override
+    public void doPost(HttpServletRequest request, HttpServletResponse response)
+        throws IOException, ServletException {
+
+      String username = (String) request.getSession().getAttribute("user");
+      if (username == null) {
+        // user is not logged in, go back to profile
+        response.sendRedirect("/profiles");
+        return;
+      }
+
+      User user = userStore.getUser(username);
+      if (user == null) {
+         // user is not logged in, go back to profile
+        System.out.println("User not found line 112: " + username);
+        response.sendRedirect("/profiles");
+        return;
+      }
+
+      //add status to database
+      String status = (String) request.getParameter("status_name");
+      if (status == null) {
+        System.out.println("User STATUS: " + status);
+      }
+
+      System.out.println("User to be stored: " + status);
+      user.setStatus(status);
+      userStore.addUser(user);
+      response.sendRedirect("/profiles");
     }
   }
