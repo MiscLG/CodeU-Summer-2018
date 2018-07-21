@@ -65,10 +65,13 @@ public class RegisterServlet extends HttpServlet {
     String password = request.getParameter("password");
     String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
     
-    String phoneNumber = null;
     /*!phoneNumber.matches("^\d{10}$")*/
     
-    phoneNumber = createNumber(request.getParameter("phone"), request.getParameter("carriers"));
+    String phoneNumber = createNumber(request.getParameter("phone"), request.getParameter("carriers"));
+    
+    if(phoneNumber != null) {
+    	request.getSession().setAttribute("phoneNumber", phoneNumber);
+    }
       
     
     User user = new User(UUID.randomUUID(), username, hashedPassword, Instant.now());

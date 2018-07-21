@@ -88,6 +88,9 @@ public class ProfileServlet extends HttpServlet {
 	  User user = UserStore.getInstance().getUser(username);
 	  user.setPhoneNumber(phoneNumber);
 	  userStore.addUser(user);
+	  if(phoneNumber != null) {
+	    	request.getSession().setAttribute("phoneNumber", phoneNumber);
+	    }
 
 	  response.sendRedirect("/profiles");
     }
