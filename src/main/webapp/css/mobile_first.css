@@ -121,6 +121,20 @@ input[type="text"],input[type="password"] {
     background-color:grey;
     text-decoration: none;
   }
+  #fileUpload{
+  text-align:center;
+  display:block;
+  margin-left:auto;
+  margin-right:auto;
+  padding:3%;
+  padding-left:15%;
+}
+#status {
+  padding:2% 0 0 0;
+  display:inline-block;
+  width:100%;
+  text-align:center;
+}
 @media screen and (min-width: 769px){
   body {
     margin: 0;
@@ -181,6 +195,9 @@ input[type="text"],input[type="password"] {
   }
   #reload {
     font-size: 19.45pt;
+  }
+  #fileUpload{
+    padding-left:15%;
   }
   #message {
     width: 796px ;
