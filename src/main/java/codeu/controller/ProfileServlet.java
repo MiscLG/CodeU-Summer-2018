@@ -99,14 +99,14 @@ public class ProfileServlet extends HttpServlet {
 
       String username = (String) request.getSession().getAttribute("user");
       if (username == null) {
-        // user is not logged in, don't let them create a conversation
+        // user is not logged in, go back to profile
         response.sendRedirect("/profiles");
         return;
       }
 
       User user = userStore.getUser(username);
       if (user == null) {
-        // user was not found, don't let them create a conversation
+         // user is not logged in, go back to profile
         System.out.println("User not found line 112: " + username);
         response.sendRedirect("/profiles");
         return;
@@ -123,25 +123,4 @@ public class ProfileServlet extends HttpServlet {
       userStore.addUser(user);
       response.sendRedirect("/profiles");
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   }
