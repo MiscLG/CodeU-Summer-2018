@@ -63,6 +63,15 @@ limitations under the License.
 
       </script>
 
+      <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+      <link rel="stylesheet" href="/css/mobile_first.css">
+      <style>
+        nav {  width:100%;  }
+        nav a:hover {  text-decoration:none;  color:white;  }
+      </style>
+      <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+      <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+      <title>Register</title>
    </head>
         <body>
         <nav>
@@ -71,12 +80,13 @@ limitations under the License.
             <% if(request.getSession().getAttribute("user") != null){ %>
                 <a href="/profiles">Profile</a>
                 <a href="/conversations">Chats</a>
-                <a href="/">Logout</a>
+                <a href="/login?logout=true" >Logout</a>
                 <% if(request.getSession().getAttribute("admin") != null) %>
                     <a href="/admin">Admin</a>
             <% } else{ %>
                 <a href="/login">Login</a>
                 <a href="/register">Register</a>
+                <a href="/mail">Mail</a>
             <% } %>
         </nav>
 

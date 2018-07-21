@@ -26,16 +26,10 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
 <html>
   <head>
     <title><%= conversation.getTitle() %></title>
-    <link rel="stylesheet" href="/css/main.css" type="text/css">
+    <link rel="stylesheet" href="/css/mobile_first.css" type="text/css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-    #chat {
-      background-color: white;
-      height: 500px;
-      overflow-y: scroll
-    }
-    </style>
     <script src="/javascript/chat.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!--<script>
     // scroll the chat div to the bottom
     function scrollChat() {
@@ -46,14 +40,13 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
     /!-->
   </head>
   <body onload="callFunctions()">
-
     <nav>
         <a id="navTitle" href="/">CodeU Chat App</a>
         <a href="/about.jsp">About</a>
         <% if(request.getSession().getAttribute("user") != null){ %>
             <a href="/profiles">Profile</a>
             <a href="/conversations">Chats</a>
-            <a href="/">Logout</a>
+            <a href="/login?logout=true" >Logout</a>
             <% if(request.getSession().getAttribute("admin") != null) %>
                 <a href="/admin">Admin</a>
         <% } else{ %>
@@ -65,8 +58,7 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
 
     <div id="container">
 
-      <h1 id="title"><%= conversation.getTitle() %>
-      <a id="reload" href="" style="float: right">&#8635;</a></h1>
+      <h1 id="title"><%= conversation.getTitle() %></h1>
 
       <hr/>
 
@@ -86,25 +78,41 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
     <hr/>
 
     <hr/>
+    <div id="messageBlock">
+    <% if (request.getSession().getAttribute("user") != null ) { %>
+        <script type="text/javascript">
+        $(document).ready(function(){
+            $("#submit").click(function(){
+                $.post('/chat/<%= conversation.getTitle() %>',
+                    {
+                        message: $("#message").val()
+                    },
+                        function(data,status) {
+                            // Do something with returned JSON named in "data"
+                    }
+                );
+            })
 
-    <% if (request.getSession().getAttribute("user") != null) { %>
-    <form id="newMessage" action="/chat/<%= conversation.getTitle() %>" method="POST">
-      <h3 class="preview">
-        Preview:
-      </h3>
-        <p class="preview" id="preview"></p>
+        }) ;
+    </script>
+
+    <form id="newMessage"  action="/mail/<%= conversation.getTitle() %>" method="POST">
+      <div id="previewBlock">
+        <p id="preview">Preview:</p>
+      </div>
         <nav id="bar">
         </nav>
         <input type="text" id="message" name="message"  onkeyup="document.getElementById('preview').innerHTML = this.value">
         <br/>
         <button type="submit" id="submit">Send</button>
-
+        <a id="reload" href="">&#8635;</a>
     </form>
+
     <% } else { %>
 
       <p><a href="/login">Login</a> to send a message.</p>
       <% } %>
-
+   </div>
       <hr/>
 
     </div>

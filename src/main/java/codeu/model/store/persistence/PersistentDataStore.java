@@ -73,6 +73,7 @@ public class PersistentDataStore {
         String passwordHash = (String) entity.getProperty("password_hash");
         String blobKey = (String) entity.getProperty("blobKey");
         Instant creationTime = Instant.parse((String) entity.getProperty("creation_time"));
+        String phoneNumber = (String) entity.getProperty("phoneNumber");
         User user = new User(uuid, userName, passwordHash, creationTime);
 
         if (status != null && !status.isEmpty()) {
@@ -173,6 +174,7 @@ public class PersistentDataStore {
     userEntity.setProperty("blobKey", user.getBlobKey());
     userEntity.setProperty("password_hash", user.getPasswordHash());
     userEntity.setProperty("creation_time", user.getCreationTime().toString());
+    userEntity.setProperty("phoneNumber", user.getPhoneNumber());
     datastore.put(userEntity);
   }
 

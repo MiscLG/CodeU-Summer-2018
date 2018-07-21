@@ -29,6 +29,7 @@ public class User {
   private String blobKey;
   private final String passwordHash;
   private final Instant creation;
+  private String phoneNumber;
 
   /**
    * Constructs a new User.
@@ -39,6 +40,7 @@ public class User {
    * @param passwordHash the password hash of this User
    * @param creation the creation time of this User
    * @param blobKey the BlobKeyof this User
+   * @param phoneNumber the phoneNumber of this User
    */
 
 
@@ -87,4 +89,15 @@ public class User {
   public Instant getCreationTime() {
     return creation;
   }
+  
+  /** Returns the phoneNumber of this User. */
+  public String getPhoneNumber() {
+    return phoneNumber;
+  }
+  
+  /** Sets the phoneNumber of this User. */
+  public void setPhoneNumber(String phoneNumber) {
+	  this.phoneNumber = phoneNumber;
+  }
+  
 }

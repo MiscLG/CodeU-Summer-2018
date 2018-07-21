@@ -57,6 +57,7 @@ public class ChatServlet extends HttpServlet {
     chatOk.addTags("div","span","strong","em","del","style","mark","sub","sup",
                    "h1","h2","h3","h4","h5","h6","blockquote","cite","dfn","a",
                    "img","iframe","code","samp");
+    //defines allowed attributes for certain html tags
     chatOk.addAttributes("div", "class", "id","style")
           .addAttributes("span", "class", "id","style")
           .addAttributes("style", "type","scoped")
@@ -64,6 +65,9 @@ public class ChatServlet extends HttpServlet {
           .addAttributes("img","align","src","width","height","alt")
           .addAttributes("iframe","align","src","width","height","allow","allowfullscreen")
           .addAttributes("blockquote","cite");
+    //limits the size of images posted on chat
+    chatOk.addEnforcedAttribute("img","width","50%")
+          .addEnforcedAttribute("img","height","auto");
   }
 
   /**
@@ -166,8 +170,5 @@ public class ChatServlet extends HttpServlet {
             Instant.now());
 
     messageStore.addMessage(message);
-
-    // redirect to a GET request
-    response.sendRedirect("/chat/" + conversationTitle);
   }
 }
