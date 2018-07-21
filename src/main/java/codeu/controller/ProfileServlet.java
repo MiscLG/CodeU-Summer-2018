@@ -82,7 +82,6 @@ public class ProfileServlet extends HttpServlet {
       throws IOException, ServletException {
 	  
 	  String phoneNumber = null;
-	    	//request.setAttribute("error", "Phone number can't have dashes or space and must be 10 digits");	
 	  phoneNumber = RegisterServlet.createNumber(request.getParameter("phone"), request.getParameter("carriers"));
 	  String username = (String) request.getSession().getAttribute("user");
 	  User user = UserStore.getInstance().getUser(username);

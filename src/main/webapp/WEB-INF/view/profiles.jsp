@@ -86,7 +86,7 @@ limitations under the License.
                 
             <% if(request.getSession().getAttribute("phoneNumber") != null) { 
                 String number = (String) request.getSession().getAttribute("phoneNumber"); %>
-                <h3>Phone: <% number.substring(0, 10); %> </h3>
+                <h3>Phone: <%= number.substring(0,10) %> </h3>
             <%
             }
             else { %> 
