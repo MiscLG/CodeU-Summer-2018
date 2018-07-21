@@ -74,4 +74,26 @@ public class ProfileServlet extends HttpServlet {
     request.setAttribute("conversations", conversations);
     request.getRequestDispatcher("/WEB-INF/view/profiles.jsp").forward(request, response);
     }
+  /**
+   * This function sets the user phone number
+   */
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response)
+      throws IOException, ServletException {
+	  
+	  String phoneNumber = null;
+	  if(true /*!phoneNumber.matches("^\d{10}$")*/) {
+	    	request.setAttribute("error", "Phone number can't have dashes or space and must be 10 digits");	
+	    }
+	    else{
+	    	phoneNumber = RegisterServlet.createNumber(request.getParameter("phone"), request.getParameter("carriers"));
+	    }  
+	    String username = (String) request.getSession().getAttribute("user");
+	    User user = UserStore.getInstance().getUser(username);
+	  	user.setPhoneNumber(phoneNumber);
+	    userStore.addUser(user);
+
+	    response.sendRedirect("/profiles");
+    }
   }
+  

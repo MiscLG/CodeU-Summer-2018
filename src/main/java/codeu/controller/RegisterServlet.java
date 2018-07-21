@@ -67,10 +67,11 @@ public class RegisterServlet extends HttpServlet {
     
     String phoneNumber = null;
     
-    if(true/*VALIDATE*/) {
-    	phoneNumber = createNumber(request.getParameter("phone"), request.getParameter("carriers"));
-    }
-
+    /*!phoneNumber.matches("^\d{10}$")*/
+    
+    phoneNumber = createNumber(request.getParameter("phone"), request.getParameter("carriers"));
+      
+    
     User user = new User(UUID.randomUUID(), username, hashedPassword, Instant.now());
     user.setPhoneNumber(phoneNumber);
     userStore.addUser(user);
@@ -78,7 +79,7 @@ public class RegisterServlet extends HttpServlet {
     response.sendRedirect("/login");
   }
   
-  private String createNumber(String phone, String carrier) {
+  public static String createNumber(String phone, String carrier) {
 	  String phoneNumber = phone;
 	  if(carrier.equals("Verizon")) phoneNumber += "@vtext.com";
 	  else if(carrier.equals("AT&T")) phoneNumber += "@txt.att.net";

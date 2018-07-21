@@ -75,14 +75,36 @@ limitations under the License.
           <!--text field goes here-->
           <form>
             <div align = "center" margin-left:auto; margin-right:auto;>
-              <textarea placeholder="Type your status here" cols="70" rows="4" id="user_input" ></textarea>
+              <textarea placeholder="Type your status here" cols="45" rows="4" id="user_input" ></textarea>
             </div>
           </form>
           <br>
             <!--submit button-->
             <input type="submit" value = "Update"  onclick="showInput();" ><br/>
             <br>
-
+            </br>
+                
+            <form action="/profiles" method="POST">
+              <label for="phone" style="text-align:center;" width = 50% >Change Phone Number (No dashes/spaces): </h2>
+              <input type="text" name="phone" id="phone"> 
+              <br/> 
+              <label for="carriersList" style="text-align:center;" width = 50% >Change Carrier: </h2>
+              <br/>
+              <input list="carriersList" name="carriers" id="carriers" >
+                  <datalist id="carriersList">
+                    <option value="Verizon">
+                    <option value="AT&T">
+                    <option value="T-Mobile">
+                    <option value="Sprint">
+                    <option value="Virgin-Mobile">
+                    <option value="Other">
+                  </datalist>
+              <br/>
+              <br/>
+              <input type="submit" value = "Save">
+            </form>
+              <br/>
+              <br/>
               <h2 style="text-align:center;">Recent Conversations</h2>
 
               <!--load conversations from database and displays them-->
@@ -96,7 +118,7 @@ limitations under the License.
               }
               else{
                 %>
-                <ul class="mdl-list" style="text-align:center;">
+                <ul class="mdl-list" >
                   <%
                   for(Conversation conversation : conversations){
                     %>
