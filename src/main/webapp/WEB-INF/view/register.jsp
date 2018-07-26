@@ -18,7 +18,7 @@
 <head>
   <title>Register</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/mobile_first.css">
 </head>
 <body>
 
@@ -28,7 +28,7 @@
         <% if(request.getSession().getAttribute("user") != null){ %>
             <a href="/profiles">Profile</a>
             <a href="/conversations">Chats</a>
-            <a href="/">Logout</a>
+            <a href="/login?logout=true" >Logout</a>
             <% if(request.getSession().getAttribute("admin") != null) %>
                 <a href="/admin">Admin</a>
         <% } else{ %>
@@ -52,6 +52,22 @@
       <label for="password">Password: </label>
       <br/>
       <input type="password" name="password" id="password">
+      <br/>
+      <label for="phone">Phone Number(No Dashes or Spaces): </label>
+      <br/>
+      <input type="text" name="phone" id="phone">
+      <br/>  
+      <label for="password">Phone Carrier: </label>   
+    <br/> 
+      <input list="carriersList" name="carriers" id="carriers">
+          <datalist id="carriersList">
+            <option value="Verizon">
+            <option value="AT&T">
+            <option value="T-Mobile">
+            <option value="Sprint">
+            <option value="Virgin-Mobile">
+            <option value="Other">
+          </datalist>
       <br/><br/>
       <button type="submit">Submit</button>
     </form>

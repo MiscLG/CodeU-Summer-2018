@@ -29,6 +29,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 /** Servlet class responsible for the conversations page. */
 public class ConversationServlet extends HttpServlet {
 
@@ -39,9 +40,9 @@ public class ConversationServlet extends HttpServlet {
   private ConversationStore conversationStore;
 
   /**
-   * Set up state for handling conversation-related requests. This method is only called when
-   * running in a server, not when running in a test.
-   */
+  * Set up state for handling conversation-related requests. This method is only called when
+  * running in a server, not when running in a test.
+  */
   @Override
   public void init() throws ServletException {
     super.init();
@@ -50,41 +51,41 @@ public class ConversationServlet extends HttpServlet {
   }
 
   /**
-   * Sets the UserStore used by this servlet. This function provides a common setup method for use
-   * by the test framework or the servlet's init() function.
-   */
+  * Sets the UserStore used by this servlet. This function provides a common setup method for use
+  * by the test framework or the servlet's init() function.
+  */
   void setUserStore(UserStore userStore) {
     this.userStore = userStore;
   }
 
   /**
-   * Sets the ConversationStore used by this servlet. This function provides a common setup method
-   * for use by the test framework or the servlet's init() function.
-   */
+  * Sets the ConversationStore used by this servlet. This function provides a common setup method
+  * for use by the test framework or the servlet's init() function.
+  */
   void setConversationStore(ConversationStore conversationStore) {
     this.conversationStore = conversationStore;
   }
 
   /**
-   * This function fires when a user navigates to the conversations page. It gets all of the
-   * conversations from the model and forwards to conversations.jsp for rendering the list.
-   */
+  * This function fires when a user navigates to the conversations page. It gets all of the
+  * conversations from the model and forwards to conversations.jsp for rendering the list.
+  */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws IOException, ServletException {
+  throws IOException, ServletException {
     List<Conversation> conversations = conversationStore.getAllConversations();
     request.setAttribute("conversations", conversations);
     request.getRequestDispatcher("/WEB-INF/view/conversations.jsp").forward(request, response);
   }
 
   /**
-   * This function fires when a user submits the form on the conversations page. It gets the
-   * logged-in username from the session and the new conversation title from the submitted form
-   * data. It uses this to create a new Conversation object that it adds to the model.
-   */
+  * This function fires when a user submits the form on the conversations page. It gets the
+  * logged-in username from the session and the new conversation title from the submitted form
+  * data. It uses this to create a new Conversation object that it adds to the model.
+  */
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response)
-      throws IOException, ServletException {
+  throws IOException, ServletException {
 
     String username = (String) request.getSession().getAttribute("user");
     if (username == null) {
@@ -116,7 +117,7 @@ public class ConversationServlet extends HttpServlet {
     }
 
     Conversation conversation =
-        new Conversation(UUID.randomUUID(), user.getId(), conversationTitle, Instant.now());
+    new Conversation(UUID.randomUUID(), user.getId(), conversationTitle, Instant.now());
 
     conversationStore.addConversation(conversation);
     response.sendRedirect("/chat/" + conversationTitle);
