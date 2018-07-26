@@ -75,6 +75,9 @@ public class PersistentDataStore {
         Instant creationTime = Instant.parse((String) entity.getProperty("creation_time"));
         User user = new User(uuid, userName, passwordHash, creationTime);
 
+        user.setPhoneNumber(phoneNumber);
+
+
         if (status != null && !status.isEmpty()) {
           user.setStatus(status);
         }

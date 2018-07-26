@@ -60,11 +60,18 @@ BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService(
 
             </script>
 
-            <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-              <link rel="stylesheet" href="/css/mobile_first.css">
-              <style>
-              nav {  width:100%;  }
-              nav a:hover {  text-decoration:none;  color:white;  }
+           <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+           <link rel="stylesheet" href="/css/mobile_first.css">
+           <style>
+             nav {  width:100%;  }
+             nav a:hover {  text-decoration:none;  color:white;  }
+      	     ul {padding:0; margin-right:auto; margin-left:auto;
+             list-style-type:none; width:50%;}
+             li {width:100%; text-align:center;
+             background-color:white; margin-top:1%;}
+             @media screen and (min-width: 769px){
+             textarea {width:75%;}
+        }
               </style>
               <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
               <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -142,6 +149,56 @@ BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService(
 
                     <h2 style="text-align:center;">Recent Conversations</h2>
                     <!--load conversations from database and displays them-->
+           <% if(request.getSession().getAttribute("phoneNumber") != null) { 
+                String number = (String) request.getSession().getAttribute("phoneNumber"); %>
+                <h3>Phone: <%= number.substring(0,10) %> </h3>
+            <%
+            }
+            else { %> 
+                <h3>PhoneNumber: N/A </h3>
+            <%
+            }
+            %>
+            <br/>
+                
+            <form action="/profiles" method="POST">
+              <label for="phone" style="text-align:center;" width = 50% >Change Phone Number (No dashes/spaces): </h2>
+              <input type="text" name="phone" id="phone"> 
+              <br/> 
+              <label for="carriersList" style="text-align:center;" width = 50% >Change Carrier: </h2>
+              <br/>
+              <input list="carriersList" name="carriers" id="carriers" >
+                  <datalist id="carriersList">
+                    <option value="Verizon">
+                    <option value="AT&T">
+                    <option value="T-Mobile">
+                    <option value="Sprint">
+                    <option value="Virgin-Mobile">
+                    <option value="Other">
+                  </datalist>
+              <br/>
+              <br/>
+              <input type="submit" value = "Save">
+            </form>
+              <br/>
+              <br/>
+              <h2 style="text-align:center;">Recent Conversations</h2>
+              <!--load conversations from database and displays them-->
+              <%
+              List<Conversation> conversations =
+              (List<Conversation>) request.getAttribute("conversations");
+              if(conversations == null || conversations.isEmpty()){
+                %>
+                <p style="text-align:center;">No recent conversations, why don't you start a new one? :)</p>
+                <%
+              }else{
+                %>
+                <ul class="mdl-list" >
+                  <%
+                  for(Conversation conversation : conversations){
+                    %>
+                    <li><a href="/chat/<%= conversation.getTitle()%>">
+                    <%= conversation.getTitle()%></a></li>
                     <%
                     List<Conversation> conversations =
                     (List<Conversation>) request.getAttribute("conversations");
