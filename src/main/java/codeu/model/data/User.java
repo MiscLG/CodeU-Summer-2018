@@ -30,6 +30,7 @@ public class User {
   private final String passwordHash;
   private final Instant creation;
   private String phoneNumber;
+  private boolean wantsNotifications;
 
   /**
    * Constructs a new User.
@@ -42,13 +43,12 @@ public class User {
    * @param blobKey the BlobKeyof this User
    * @param phoneNumber the phoneNumber of this User
    */
-
-
   public User(UUID id, String name, String passwordHash, Instant creation) {
     this.id = id;
     this.name = name;
     this.passwordHash = passwordHash;
     this.creation = creation;
+    wantsNotifications = false;
   }
 
   /** Returns the ID of this User. */
@@ -99,5 +99,14 @@ public class User {
   public void setPhoneNumber(String phoneNumber) {
 	  this.phoneNumber = phoneNumber;
   }
+  
+  public boolean wantsNotifications() {
+	  return wantsNotifications;
+  }
+  
+  public void setNotifications(boolean wantsNotifications) {
+	  this.wantsNotifications = wantsNotifications;
+  }
+  
   
 }

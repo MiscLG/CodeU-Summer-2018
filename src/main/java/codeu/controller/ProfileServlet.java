@@ -86,7 +86,6 @@ public class ProfileServlet extends HttpServlet {
 
     String status = user.getStatus();
 
-    System.out.println("User RELOADED STATUS: " + status);
     if (status != null)
     request.setAttribute("status_name", status);
 
@@ -120,9 +119,17 @@ public class ProfileServlet extends HttpServlet {
 	  user.setPhoneNumber(phoneNumber);
 	  userStore.addUser(user);
 	  
+	  String textNotifications = request.getParameter("texts");
+	  if(textNotifications.equals("On")) {
+		  user.setNotifications(true);
+	  }
+	  else {
+		  user.setNotifications(false);
+	  }
+	  
 	  if(phoneNumber != null) {
-	    	request.getSession().setAttribute("phoneNumber", phoneNumber);
-	    }
+	    request.getSession().setAttribute("phoneNumber", phoneNumber);
+	   }
 
 
       //add status to database

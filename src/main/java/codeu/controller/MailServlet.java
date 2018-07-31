@@ -18,6 +18,7 @@ package codeu.controller;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,6 +38,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
 
+import codeu.model.data.Conversation;
 import codeu.model.data.User;
 import codeu.model.store.basic.ConversationStore;
 import codeu.model.store.basic.MessageStore;
@@ -47,60 +49,68 @@ public class MailServlet extends HttpServlet {
 
   private static final Logger logger = Logger.getLogger(MailServlet.class.getName());
  
-	
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-	String messageContent = request.getParameter("message");
-	String textNotifications = request.getParameter("texts");
-	
-	logger.info("MailClass: " + textNotifications);
+	 String requestUrl = request.getRequestURI();
+	  
+	String conversationTitle = requestUrl.substring("/mail/".length());
+	System.out.print(conversationTitle);
+	response.sendRedirect("/chat/" + conversationTitle);
+	  
+	String messageContent = request.getParameter("message"); 
 	
 	String username = (String) request.getSession().getAttribute("user");
-    if (username == null) {
+    
+	if (username == null) {
       // user is not logged in, don't let them add send a text
       response.sendRedirect("/login");
       return;
-    }
-    logger.info("Username " + username);
-
+    };
+    
     User user = UserStore.getInstance().getUser(username);
     if (user == null) {
-      // user was not found, don't let them send a text
+      // user was not found, don't let them add a message
       response.sendRedirect("/login");
       return;
     }
     
-    String phoneNumber = user.getPhoneNumber();
-	
-	logger.info("MailClass: " + phoneNumber);
+    Conversation conversation = ConversationStore.getInstance().
+    		getConversationWithTitle(conversationTitle);
     
-	if(user.getPhoneNumber() != null && textNotifications != null) {
-		sendSimpleMail(messageContent, phoneNumber, username);
-	}
-	
-	String requestUrl = request.getRequestURI();
-    String conversationTitle = requestUrl.substring("/mail/".length());
-    response.sendRedirect("/chat/" + conversationTitle);
+    ArrayList<User> participants = conversation.getChatParticipants();
+    if(participants.size() > 0) {
+    	sendSimpleMail(messageContent, username, conversationTitle, participants);
+    }
+
   }
 
-  private void sendSimpleMail(String messageContent, String phoneNumber, String username) {
+  private void sendSimpleMail(String messageContent, String username, 
+		  String conversationTitle, ArrayList<User> participants) {
     Properties props = new Properties();
     Session session = Session.getDefaultInstance(props, null);
 
     try {
       Message msg = new MimeMessage(session);
       msg.setFrom(new InternetAddress("lriffle@codeustudents.com"));
-      msg.addRecipient(Message.RecipientType.TO,
-                       new InternetAddress(phoneNumber));
-      msg.setSubject(username + " ");
+      
+      boolean send = false;
+      
+      for(User participant: participants) {
+    	  if(participant.getPhoneNumber() != null && participant.wantsNotifications()) {
+    		  msg.addRecipient(Message.RecipientType.TO,
+                      new InternetAddress(participant.getPhoneNumber()));
+    		  send = true;
+    	  }
+      }
+      msg.setSubject(conversationTitle + ": "+ username + " ");
       msg.setText(Jsoup.clean(messageContent, Whitelist.none()));
-      Transport.send(msg);
+      if(send) {
+    	  Transport.send(msg);
+      }
     } catch (AddressException e) {
       // ...
     } catch (MessagingException e) {
       // ...
-    } /*catch (UnsupportedEncodingException e) {
-      // ...
-    }*/
+    }
   }
 }

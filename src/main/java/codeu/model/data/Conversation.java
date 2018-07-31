@@ -15,7 +15,11 @@
 package codeu.model.data;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.UUID;
+import java.util.logging.Logger;
+
+import codeu.controller.MailServlet;
 
 /**
  * Class representing a conversation, which can be thought of as a chat room. Conversations are
@@ -26,6 +30,7 @@ public class Conversation {
   public final UUID owner;
   public final Instant creation;
   public final String title;
+  public ArrayList<User> participants;
 
   /**
    * Constructs a new Conversation.
@@ -40,6 +45,7 @@ public class Conversation {
     this.owner = owner;
     this.creation = creation;
     this.title = title;
+    this.participants = new ArrayList<User>();
   }
 
   /** Returns the ID of this Conversation. */
@@ -60,5 +66,24 @@ public class Conversation {
   /** Returns the creation time of this Conversation. */
   public Instant getCreationTime() {
     return creation;
+  }
+  
+  /** Returns the creation time of this Conversation. */
+  public ArrayList<User> getChatParticipants() {
+    return participants;
+  }
+  
+  /** Returns the creation time of this Conversation. */
+  public void setChatParticipants(ArrayList<User> participants) {
+    this.participants = participants;
+  }
+  
+  public void addParticipants(User user) {
+	  if(participants == null) {
+		  participants = new ArrayList<User>();
+	  }
+	  if(!participants.contains(user)) {
+		  participants.add(user);
+	  }
   }
 }

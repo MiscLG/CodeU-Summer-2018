@@ -102,8 +102,6 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
         </nav>
         <input type="text" id="message" name="message"  onkeyup="document.getElementById('preview').innerHTML = this.value">
         <br/>
-        <input type="checkbox" id="texst "name="texts" value="On" checked>Text notifications<br>
-        <br/>
         <button type="submit" id="submit">Send</button>
         <a id="reload" href="">&#8635;</a>
     </form>
