@@ -37,9 +37,9 @@ public class ProfileServlet extends HttpServlet {
   private ConversationStore conversationStore;
 
   /**
-   * Set up state for handling conversation-related requests. This method is only called when
-   * running in a server, not when running in a test.
-   */
+  * Set up state for handling conversation-related requests. This method is only called when
+  * running in a server, not when running in a test.
+  */
   @Override
   public void init() throws ServletException {
     super.init();
@@ -48,31 +48,30 @@ public class ProfileServlet extends HttpServlet {
   }
 
   /**
-   * Sets the UserStore used by this servlet. This function provides a common setup method for use
-   * by the test framework or the servlet's init() function.
-   */
+  * Sets the UserStore used by this servlet. This function provides a common setup method for use
+  * by the test framework or the servlet's init() function.
+  */
   void setUserStore(UserStore userStore) {
     this.userStore = userStore;
   }
 
   /**
-   * Sets the ConversationStore used by this servlet. This function provides a common setup method
-   * for use by the test framework or the servlet's init() function.
-   */
+  * Sets the ConversationStore used by this servlet. This function provides a common setup method
+  * for use by the test framework or the servlet's init() function.
+  */
   void setConversationStore(ConversationStore conversationStore) {
     this.conversationStore = conversationStore;
   }
 
   /**
-   * This function fires when a user navigates to the conversations page. It gets all of the
-   * conversations from the model and forwards to profiles.jsp for rendering the list.
-   */
+  * This function fires when a user navigates to the profile page. It gets all of the
+  * conversations and all relevant info from the model and forwards to profiles.jsp for rendering the list.
+  */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws IOException, ServletException {
+  throws IOException, ServletException {
     List<Conversation> conversations = conversationStore.getAllConversations();
-    String username = (String)request.getSession().getAttribute("user");
-
+    String username = (String) request.getSession().getAttribute("user");
     User user = userStore.getUser(username);
 
     if (user == null) {
@@ -82,14 +81,9 @@ public class ProfileServlet extends HttpServlet {
       return;
     }
 
-    request.setAttribute("conversations", conversations);
-
     String status = user.getStatus();
-
-    System.out.println("User RELOADED STATUS: " + status);
-    if (status != null)
     request.setAttribute("status_name", status);
-
+    request.setAttribute("conversations", conversations);
     request.getRequestDispatcher("/WEB-INF/view/profiles.jsp").forward(request, response);
     }
 
@@ -118,21 +112,16 @@ public class ProfileServlet extends HttpServlet {
 	        return;
 	      }
 	  user.setPhoneNumber(phoneNumber);
-	  userStore.addUser(user);
 	  
 	  if(phoneNumber != null) {
 	    	request.getSession().setAttribute("phoneNumber", phoneNumber);
 	    }
 
-
-      //add status to database
-      String status = (String) request.getParameter("status_name");
-      if (status == null) {
-        System.out.println("User STATUS: " + status);
-      }
-  
-      user.setStatus(status);
-      response.sendRedirect("/profiles");
-    }
+    //gets status entered
+    String status = request.getParameter("status_name");
+    //updates database
+    user.setStatus(status);
+    userStore.addUser(user);
+    response.sendRedirect("/profiles");
   }
-  
+}

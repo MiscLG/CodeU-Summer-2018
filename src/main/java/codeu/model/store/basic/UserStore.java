@@ -22,19 +22,18 @@ import java.util.HashMap;
 import java.util.UUID;
 
 /**
- * Store class that uses in-memory data structures to hold values and automatically loads from and
- * saves to PersistentStorageAgent. It's a singleton so all servlet classes can access the same
- * instance.
- */
+* Store class that uses in-memory data structures to hold values and automatically loads from and
+* saves to PersistentStorageAgent. It's a singleton so all servlet classes can access the same
+* instance.
+*/
 public class UserStore {
-
   /** Singleton instance of UserStore. */
   private static UserStore instance;
 
   /**
-   * Returns the singleton instance of UserStore that should be shared between all servlet classes.
-   * Do not call this function from a test; use getTestInstance() instead.
-   */
+  * Returns the singleton instance of UserStore that should be shared between all servlet classes.
+  * Do not call this function from a test; use getTestInstance() instead.
+  */
   public static UserStore getInstance() {
     if (instance == null) {
       instance = new UserStore(PersistentStorageAgent.getInstance());
@@ -43,89 +42,73 @@ public class UserStore {
   }
 
   /**
-   * Instance getter function used for testing. Supply a mock for PersistentStorageAgent.
-   *
-   * @param persistentStorageAgent a mock used for testing
-   */
+  * Instance getter function used for testing. Supply a mock for PersistentStorageAgent.
+  *
+  * @param persistentStorageAgent a mock used for testing
+  */
   public static UserStore getTestInstance(PersistentStorageAgent persistentStorageAgent) {
     return new UserStore(persistentStorageAgent);
   }
 
   /**
-   * The PersistentStorageAgent responsible for loading Users from and saving Users to Datastore.
-   */
+  * The PersistentStorageAgent responsible for loading Users from and saving Users to Datastore.
+  */
   private PersistentStorageAgent persistentStorageAgent;
-
-
-    //MAP IMPLEMETATION
   private HashMap<String,User> usersMap;
   private User newestUser = null;
 
   /** This class is a singleton, so its constructor is private. Call getInstance() instead. */
   private UserStore(PersistentStorageAgent persistentStorageAgent) {
     this.persistentStorageAgent = persistentStorageAgent;
-  
-
-      //MAP IMPLEMETATION
     usersMap = new HashMap<String, User>();
   }
 
   /**
-   * Access the User object with the given name.
-   *
-   * @return null if username does not match any existing User.
-   */
+  * Access the User object with the given name.
+  *
+  * @return null if username does not match any existing User.
+  */
   public User getUser(String username) {
-
-      //MAP IMPLEMETATION
-      if (usersMap.containsKey(username)) {
-          return usersMap.get(username);
-      } else {
-          return null;
+    if (usersMap.containsKey(username)) {
+      return usersMap.get(username);
+    } else {
+      return null;
     }
   }
 
   /**
-   * Access the User object with the given UUID.
-   *
-   * @return null if the UUID does not match any existing User.
-   */
+  * Access the User object with the given UUID.
+  *
+  * @return null if the UUID does not match any existing User.
+  */
   public User getUser(UUID id) {
-  
-  //MAP IMPLEMETATION
     for (User user : usersMap.values()) {
       if (user.getId().equals(id)) {
         return user;
       }
     }
-      return null;
+    return null;
   }
 
   /**
-   * Add a new user to the current set of users known to the application. This should only be called
-   * to add a new user, not to update an existing user.
-   */
+  * Add a new user to the current set of users known to the application. This should only be called
+  * to add a new user, not to update an existing user.
+  */
   public void addUser(User user) {
-  
-  //MAP IMPLEMETATION
-
     newestUser = user;
     usersMap.put(user.getName(), user);
     persistentStorageAgent.writeThrough(user);
   }
 
   /**
-   * Update an existing User.
-   */
+  * Update an existing User.
+  */
   public void updateUser(User user) {
     persistentStorageAgent.writeThrough(user);
   }
 
   /** Return true if the given username is known to the application. */
   public boolean isUserRegistered(String username) {
-  
-
-  //MAP IMPLEMETATION
     for (User user : usersMap.values()) {
       if (user.getName().equals(username)) {
         return true;
@@ -135,53 +118,39 @@ public class UserStore {
   }
 
   /**
-   * Sets the List of Users stored by this UserStore. This should only be called once, when the data
-   * is loaded from Datastore.
-   */
+  * Sets the List of Users stored by this UserStore. This should only be called once, when the data
+  * is loaded from Datastore.
+  */
   public void setUsers(List<User> users) {
-  //MAP IMPLEMETATION
-      //loop through all the list and add to map
-      for (User user : users) {
-        usersMap.put(user.getName(), user);
-        }
+    for (User user : users) {
+      usersMap.put(user.getName(), user);
+    }
   }
 
   /**
-   * Gets the name of the newest user.
-   */
+  * Gets the name of the newest user.
+  */
   public String getNewestUser() {
-	  // if(users.size() > 0)
-	  //  return this.users.get(users.size()-1).getName();
-	  // return "N/A";
-
-      //MAP IMPLEMETATION
     if (newestUser == null ) return "N/A";
     return newestUser.getName();
   }
 
   /**
-   * Gets number of users.
-   */
+  * Gets number of users.
+  */
   public int getUserCount() {
-	  //return this.users.size();
-
-      //MAP IMPLEMETATION
     return this.usersMap.size();
   }
 
   /**
-   * Gets list of all users.
-   */
+  * Gets list of all users.
+  */
   public List<User> getUsers() {
-	//  return users;
-
-  //MAP IMPLEMETATION
-   List<User> users = new ArrayList<>(); ;
-  //loop through all the list and add to map
-  for (User user : usersMap.values()) {
-    users.add(user);
+    List<User> users = new ArrayList<>(); ;
+    for (User user : usersMap.values()) {
+      users.add(user);
     }
-  return users;
+    return users;
   }
 
 }
