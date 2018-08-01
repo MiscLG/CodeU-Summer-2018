@@ -155,6 +155,8 @@ public class ChatServlet extends HttpServlet {
       response.sendRedirect("/conversations");
       return;
     }
+    
+    conversation.addParticipants(user);
 
     String messageContent = request.getParameter("message");
 

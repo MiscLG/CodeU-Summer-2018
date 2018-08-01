@@ -178,6 +178,8 @@ BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService(
                   </datalist>
               <br/>
               <br/>
+              <input type="checkbox" id="texts" name="texts" value="On">Text notifications for chats<br>
+              <br/>
               <input type="submit" value = "Save">
             </form>
               <br/>

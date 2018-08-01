@@ -113,9 +113,17 @@ public class ProfileServlet extends HttpServlet {
 	      }
 	  user.setPhoneNumber(phoneNumber);
 	  
+	  String textNotifications = request.getParameter("texts");
+	  if(textNotifications.equals("On")) {
+		  user.setNotifications(true);
+	  }
+	  else {
+		  user.setNotifications(false);
+	  }
+	  
 	  if(phoneNumber != null) {
-	    	request.getSession().setAttribute("phoneNumber", phoneNumber);
-	    }
+	    request.getSession().setAttribute("phoneNumber", phoneNumber);
+	   }
 
     //gets status entered
     String status = request.getParameter("status_name");
