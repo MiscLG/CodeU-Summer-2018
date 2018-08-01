@@ -43,7 +43,7 @@ public class User {
    * @param blobKey the BlobKeyof this User
    * @param phoneNumber the phoneNumber of this User
    */
-  * Constructs a new User.
+ /* * Constructs a new User.
   *
   * @param id the ID of this User
   * @param name the username of this User

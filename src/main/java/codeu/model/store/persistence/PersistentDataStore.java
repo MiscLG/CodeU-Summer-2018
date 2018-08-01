@@ -73,6 +73,7 @@ public class PersistentDataStore {
         String passwordHash = (String) entity.getProperty("password_hash");
         String blobKey = (String) entity.getProperty("blobKey");
         Instant creationTime = Instant.parse((String) entity.getProperty("creation_time"));
+        String phoneNumber = (String) entity.getProperty("phone_number");
         User user = new User(uuid, userName, passwordHash, creationTime);
 
         user.setPhoneNumber(phoneNumber);
@@ -120,7 +121,6 @@ public class PersistentDataStore {
         String title = (String) entity.getProperty("title");
         Instant creationTime = Instant.parse((String) entity.getProperty("creation_time"));
         Conversation conversation = new Conversation(uuid, ownerUuid, title, creationTime);
-		conversation.setChatParticipants((ArrayList<User>) entity.getProperty("participants"));
         conversations.add(conversation);
       } catch (Exception e) {
         // In a production environment, errors should be very rare. Errors which may
@@ -177,6 +177,7 @@ public class PersistentDataStore {
     userEntity.setProperty("blobKey", user.getBlobKey());
     userEntity.setProperty("password_hash", user.getPasswordHash());
     userEntity.setProperty("creation_time", user.getCreationTime().toString());
+    userEntity.setProperty("phone_number", user.getPhoneNumber());
     datastore.put(userEntity);
   }
 
@@ -198,7 +199,6 @@ public class PersistentDataStore {
     conversationEntity.setProperty("owner_uuid", conversation.getOwnerId().toString());
     conversationEntity.setProperty("title", conversation.getTitle());
     conversationEntity.setProperty("creation_time", conversation.getCreationTime().toString());
-    conversationEntity.setProperty("participants", conversation.getChatParticipants());
     datastore.put(conversationEntity);
   }
 }
