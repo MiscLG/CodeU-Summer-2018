@@ -34,29 +34,29 @@ import com.google.appengine.api.blobstore.BlobstoreService;
 import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
 
 /**
- * This class handles all interactions with Google App Engine's Datastore service. On startup it
- * sets the state of the applications's data objects from the current contents of its Datastore. It
- * also performs writes of new of modified objects back to the Datastore.
- */
+* This class handles all interactions with Google App Engine's Datastore service. On startup it
+* sets the state of the applications's data objects from the current contents of its Datastore. It
+* also performs writes of new of modified objects back to the Datastore.
+*/
 public class PersistentDataStore {
 
   // Handle to Google AppEngine's Datastore service.
   private DatastoreService datastore;
 
   /**
-   * Constructs a new PersistentDataStore and sets up its state to begin loading objects from the
-   * Datastore service.
-   */
+  * Constructs a new PersistentDataStore and sets up its state to begin loading objects from the
+  * Datastore service.
+  */
   public PersistentDataStore() {
     datastore = DatastoreServiceFactory.getDatastoreService();
   }
 
   /**
-   * Loads all User objects from the Datastore service and returns them in a List.
-   *
-   * @throws PersistentDataStoreException if an error was detected during the load from the
-   *     Datastore service
-   */
+  * Loads all User objects from the Datastore service and returns them in a List.
+  *
+  * @throws PersistentDataStoreException if an error was detected during the load from the
+  *     Datastore service
+  */
   public List<User> loadUsers() throws PersistentDataStoreException {
 
     List<User> users = new ArrayList<>();
@@ -73,7 +73,6 @@ public class PersistentDataStore {
         String passwordHash = (String) entity.getProperty("password_hash");
         String blobKey = (String) entity.getProperty("blobKey");
         Instant creationTime = Instant.parse((String) entity.getProperty("creation_time"));
-        String phoneNumber = (String) entity.getProperty("phoneNumber");
         User user = new User(uuid, userName, passwordHash, creationTime);
 
         user.setPhoneNumber(phoneNumber);
@@ -100,12 +99,12 @@ public class PersistentDataStore {
   }
 
   /**
-   * Loads all Conversation objects from the Datastore service and returns them in a List, sorted in
-   * ascending order by creation time.
-   *
-   * @throws PersistentDataStoreException if an error was detected during the load from the
-   *     Datastore service
-   */
+  * Loads all Conversation objects from the Datastore service and returns them in a List, sorted in
+  * ascending order by creation time.
+  *
+  * @throws PersistentDataStoreException if an error was detected during the load from the
+  *     Datastore service
+  */
   public List<Conversation> loadConversations() throws PersistentDataStoreException {
 
     List<Conversation> conversations = new ArrayList<>();
@@ -135,12 +134,12 @@ public class PersistentDataStore {
   }
 
   /**
-   * Loads all Message objects from the Datastore service and returns them in a List, sorted in
-   * ascending order by creation time.
-   *
-   * @throws PersistentDataStoreException if an error was detected during the load from the
-   *     Datastore service
-   */
+  * Loads all Message objects from the Datastore service and returns them in a List, sorted in
+  * ascending order by creation time.
+  *
+  * @throws PersistentDataStoreException if an error was detected during the load from the
+  *     Datastore service
+  */
   public List<Message> loadMessages() throws PersistentDataStoreException {
 
     List<Message> messages = new ArrayList<>();
@@ -178,7 +177,6 @@ public class PersistentDataStore {
     userEntity.setProperty("blobKey", user.getBlobKey());
     userEntity.setProperty("password_hash", user.getPasswordHash());
     userEntity.setProperty("creation_time", user.getCreationTime().toString());
-    userEntity.setProperty("phoneNumber", user.getPhoneNumber());
     datastore.put(userEntity);
   }
 

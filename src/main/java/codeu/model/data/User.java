@@ -43,6 +43,17 @@ public class User {
    * @param blobKey the BlobKeyof this User
    * @param phoneNumber the phoneNumber of this User
    */
+  * Constructs a new User.
+  *
+  * @param id the ID of this User
+  * @param name the username of this User
+  * @param status the status of this User
+  * @param passwordHash the password hash of this User
+  * @param creation the creation time of this User
+  * @param blobKey the BlobKeyof this User
+  * @param phoneNumber the phoneNumber of this User
+  */
+
   public User(UUID id, String name, String passwordHash, Instant creation) {
     this.id = id;
     this.name = name;
@@ -62,7 +73,7 @@ public class User {
 
   /** sets the BlobKey of this User. */
   public void setStatus(String value) {
-     status = value;
+    status = value;
   }
 
   /** Returns the BlobKey of this User. */
@@ -72,7 +83,7 @@ public class User {
 
   /** sets the BlobKey of this User. */
   public void setBlobKey(String key) {
-     blobKey = key;
+    blobKey = key;
   }
 
   /** Returns the username of this User. */
@@ -89,15 +100,15 @@ public class User {
   public Instant getCreationTime() {
     return creation;
   }
-  
+
   /** Returns the phoneNumber of this User. */
   public String getPhoneNumber() {
     return phoneNumber;
   }
-  
+
   /** Sets the phoneNumber of this User. */
   public void setPhoneNumber(String phoneNumber) {
-	  this.phoneNumber = phoneNumber;
+    this.phoneNumber = phoneNumber;
   }
   
   public boolean wantsNotifications() {
@@ -107,6 +118,4 @@ public class User {
   public void setNotifications(boolean wantsNotifications) {
 	  this.wantsNotifications = wantsNotifications;
   }
-  
-  
 }

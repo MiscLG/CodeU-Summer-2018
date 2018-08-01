@@ -21,71 +21,71 @@ limitations under the License.
   <head>
     <title>Conversations</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/mobile_first.css">
-    </head>
-    <body>
+      <link rel="stylesheet" href="/css/mobile_first.css">
+      </head>
+      <body>
 
-    <nav>
-        <a id="navTitle" href="/">CodeU Chat App</a>
-        <a href="/about.jsp">About</a>
-        <% if(request.getSession().getAttribute("user") != null){ %>
-            <a href="/profiles">Profile</a>
-            <a href="/conversations">Chats</a>
-            <a href="/login?logout=true" >Logout</a>
-            <% if(request.getSession().getAttribute("admin") != null) %>
-                <a href="/admin">Admin</a>
-        <% } else{ %>
-            <a href="/login">Login</a>
-            <a href="/register">Register</a>
-        <% } %>
-    </nav>
+        <nav>
+          <a id="navTitle" href="/">CodeU Chat App</a>
+          <a href="/about.jsp">About</a>
+          <% if(request.getSession().getAttribute("user") != null){ %>
+          <a href="/profiles">Profile</a>
+          <a href="/conversations">Chats</a>
+          <a href="/login?logout=true" >Logout</a>
+          <% if(request.getSession().getAttribute("admin") != null) %>
+          <a href="/admin">Admin</a>
+          <% } else{ %>
+          <a href="/login">Login</a>
+          <a href="/register">Register</a>
+          <% } %>
+        </nav>
 
-      <div id="container">
+        <div id="container">
 
-        <% if(request.getAttribute("error") != null){ %>
-        <h2 style="color:red"><%= request.getAttribute("error") %></h2>
-        <% } %>
-
-        <% if(request.getSession().getAttribute("user") != null){ %>
-        <h1>New Conversation</h1>
-        <form action="/conversations" method="POST">
-          <div class="form-group">
-            <label class="form-control-label">Title:</label>
-            <input type="text" name="conversationTitle">
-            </div>
-
-            <button type="submit">Create</button>
-          </form>
-
-          <hr/>
+          <% if(request.getAttribute("error") != null){ %>
+          <h2 style="color:red"><%= request.getAttribute("error") %></h2>
           <% } %>
 
-          <h1>Conversations</h1>
+          <% if(request.getSession().getAttribute("user") != null){ %>
+          <h1>New Conversation</h1>
+          <form action="/conversations" method="POST">
+            <div class="form-group">
+              <label class="form-control-label">Title:</label>
+              <input type="text" name="conversationTitle">
+              </div>
 
-          <%
-          List<Conversation> conversations =
-          (List<Conversation>) request.getAttribute("conversations");
-          if(conversations == null || conversations.isEmpty()){
-            %>
-            <p>Create a conversation to get started.</p>
+              <button type="submit">Create</button>
+            </form>
+
+            <hr/>
+            <% } %>
+
+            <h1>Conversations</h1>
+
             <%
-          }
-          else{
-            %>
-            <ul class="mdl-list">
-              <%
-              for(Conversation conversation : conversations){
-                %>
-                <li><a href="/chat/<%= conversation.getTitle() %>">
-                <%= conversation.getTitle() %></a></li>
-                <%
-              }
+            List<Conversation> conversations =
+            (List<Conversation>) request.getAttribute("conversations");
+            if(conversations == null || conversations.isEmpty()){
               %>
-            </ul>
-            <%
-          }
-          %>
-          <hr/>
-        </div>
-      </body>
-    </html>
+              <p>Create a conversation to get started.</p>
+              <%
+            }
+            else{
+              %>
+              <ul class="mdl-list">
+                <%
+                for(Conversation conversation : conversations){
+                  %>
+                  <li><a href="/chat/<%= conversation.getTitle() %>">
+                  <%= conversation.getTitle() %></a></li>
+                  <%
+                }
+                %>
+              </ul>
+              <%
+            }
+            %>
+            <hr/>
+          </div>
+        </body>
+      </html>

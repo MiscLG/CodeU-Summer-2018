@@ -23,9 +23,9 @@ limitations under the License.
 
       <div id="container">
         <form action="/mail" method="POST">
-              <button type="submit">Test</button>
+          <button type="submit">Test</button>
         </form>
 
       </div>
     </body>
-</html>
+  </html>
