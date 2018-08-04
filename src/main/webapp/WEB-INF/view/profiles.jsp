@@ -33,6 +33,7 @@ BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService(
           <link rel="stylesheet" href="/css/main.css">
             <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
             <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+            <script src="/javascript/profile.js"></script>
             <title>Register</title>
 
             <!--JavaScript functions-->
@@ -64,20 +65,21 @@ BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService(
            <link rel="stylesheet" href="/css/mobile_first.css">
            <style>
              nav {  width:100%;  }
+              #status_name, #bar {width:100%;}
              nav a:hover {  text-decoration:none;  color:white;  }
       	     ul {padding:0; margin-right:auto; margin-left:auto;
              list-style-type:none; width:50%;}
              li {width:100%; text-align:center;
              background-color:white; margin-top:1%;}
              @media screen and (min-width: 769px){
-             textarea {width:75%;}
+              #status_name, #bar {width:75%;}
         }
               </style>
               <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
               <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
               <title>Register</title>
             </head>
-            <body>
+            <body onload="callFunctions()">
               <nav>
                 <a id="navTitle" href="/">CodeU Chat App</a>
                 <a href="/about.jsp">About</a>
@@ -136,7 +138,9 @@ BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService(
               <% if(request.getSession().getAttribute("user") != null){ %>
               <form action="/profiles" method="POST">
                 <div class="form-group" align = "center" margin-left:auto; margin-right:auto;>
-                  <input type="text" name="status_name" placeholder="Type your status here" cols="70" rows="4" id="status_name">
+                  <nav id="bar"></nav>
+                  <input type="text" name="status_name" placeholder="Type your status here" cols="70" rows="4" id="status_name"
+                    onkeyup="document.getElementById('status').innerHTML = this.value">
                   </div>
                   <br>
                     <!--submit status-->
@@ -148,22 +152,22 @@ BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService(
                     <% } %>
 
                     <!--load conversations from database and displays them-->
-           <% if(request.getSession().getAttribute("phoneNumber") != null) { 
+           <% if(request.getSession().getAttribute("phoneNumber") != null) {
                 String number = (String) request.getSession().getAttribute("phoneNumber"); %>
                 <h3>Phone: <%= number.substring(0,10) %> </h3>
             <%
             }
-            else { %> 
+            else { %>
                 <h3>PhoneNumber: N/A </h3>
             <%
             }
             %>
             <br/>
-                
+
             <form action="/profiles" method="POST">
               <label for="phone" style="text-align:center;" width = 50% >Change Phone Number (No dashes/spaces): </h2>
-              <input type="text" name="phone" id="phone"> 
-              <br/> 
+              <input type="text" name="phone" id="phone">
+              <br/>
               <label for="carriersList" style="text-align:center;" width = 50% >Change Carrier: </h2>
               <br/>
               <input list="carriersList" name="carriers" id="carriers" >
