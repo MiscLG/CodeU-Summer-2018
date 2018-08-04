@@ -147,7 +147,6 @@ BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService(
                     </form>
                     <% } %>
 
-                    <h2 style="text-align:center;">Recent Conversations</h2>
                     <!--load conversations from database and displays them-->
            <% if(request.getSession().getAttribute("phoneNumber") != null) { 
                 String number = (String) request.getSession().getAttribute("phoneNumber"); %>
@@ -202,27 +201,12 @@ BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService(
                     <li><a href="/chat/<%= conversation.getTitle()%>">
                     <%= conversation.getTitle()%></a></li>
                     <%
-                    List<Conversation> conversations =
-                    (List<Conversation>) request.getAttribute("conversations");
-                    if(conversations == null || conversations.isEmpty()){
-                      %>
-                      <p style="text-align:center;">No recent conversations, why don't you start a new one? :)</p>
-                      <%
-                    }else{
-                      %>
-                      <ul class="mdl-list">
-                        <%
-                        for(Conversation conversation : conversations){
-                          %>
-                          <li><a href="/chat/<%= conversation.getTitle()%>">
-                          <%= conversation.getTitle()%></a></li>
-                          <%
-                        }
-                        %>
-                      </ul>
-                      <%
-                    }
-                    %>
-                    <br>
-                    </body>
-                  </html>
+                  }
+                  %>
+                </ul>
+                <%
+              }
+              %>
+              <br>
+              </body>
+            </html>

@@ -94,8 +94,7 @@ public class ProfileServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response)
       throws IOException, ServletException {
 	  
-	  String phoneNumber = null;
-	  phoneNumber = RegisterServlet.createNumber(request.getParameter("phone"), request.getParameter("carriers"));
+	  String phoneNumber = RegisterServlet.createNumber(request.getParameter("phone"), request.getParameter("carriers"));
 	  
 	  String username = (String) request.getSession().getAttribute("user");
 	  if (username == null) {
@@ -114,16 +113,16 @@ public class ProfileServlet extends HttpServlet {
 	  user.setPhoneNumber(phoneNumber);
 	  
 	  String textNotifications = request.getParameter("texts");
-	  if(textNotifications.equals("On")) {
+	  if(textNotifications != null && textNotifications.equals("On")) {
 		  user.setNotifications(true);
 	  }
 	  else {
 		  user.setNotifications(false);
 	  }
 	  
-	  if(phoneNumber != null) {
+	 if(phoneNumber != null) {
 	    request.getSession().setAttribute("phoneNumber", phoneNumber);
-	   }
+	  }
 
     //gets status entered
     String status = request.getParameter("status_name");

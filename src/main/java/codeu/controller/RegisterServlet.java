@@ -65,15 +65,10 @@ public class RegisterServlet extends HttpServlet {
     String password = request.getParameter("password");
     String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
     
-    /*!phoneNumber.matches("^\d{10}$")*/
-    
     String phoneNumber = createNumber(request.getParameter("phone"), request.getParameter("carriers"));
     
-    if(phoneNumber != null) {
-    	request.getSession().setAttribute("phoneNumber", phoneNumber);
-    }
-      
-    
+    request.getSession().setAttribute("phoneNumber", phoneNumber);
+          
     User user = new User(UUID.randomUUID(), username, hashedPassword, Instant.now());
     user.setPhoneNumber(phoneNumber);
     userStore.addUser(user);
@@ -82,13 +77,16 @@ public class RegisterServlet extends HttpServlet {
   }
   
   public static String createNumber(String phone, String carrier) {
-	  String phoneNumber = phone;
-	  if(carrier.equals("Verizon")) phoneNumber += "@vtext.com";
-	  else if(carrier.equals("AT&T")) phoneNumber += "@txt.att.net";
-	  else if(carrier.equals("T-Mobile")) phoneNumber += "@tmomail.net";
-	  else if(carrier.equals("Sprint")) phoneNumber += "@messaging.sprintpcs.com";
-	  else if(carrier.equals("Virgin-Mobile")) phoneNumber += "@vmobl.com";
-	  else phoneNumber = null;
+	  String phoneNumber = null;
+	  if(phone.matches("[0-9]{10}")) {
+		  phoneNumber = phone;
+		  if(carrier.equals("Verizon")) phoneNumber += "@vtext.com";
+		  else if(carrier.equals("AT&T")) phoneNumber += "@txt.att.net";
+		  else if(carrier.equals("T-Mobile")) phoneNumber += "@tmomail.net";
+		  else if(carrier.equals("Sprint")) phoneNumber += "@messaging.sprintpcs.com";
+		  else if(carrier.equals("Virgin-Mobile")) phoneNumber += "@vmobl.com";
+		  else phoneNumber = null;
+	  }
 	  return phoneNumber;
   }
 }
