@@ -78,7 +78,7 @@ public class RegisterServlet extends HttpServlet {
   
   public static String createNumber(String phone, String carrier) {
 	  String phoneNumber = null;
-	  if(phone.matches("[0-9]{10}")) {
+	  if(phone != null && phone.matches("[0-9]{10}")) {
 		  phoneNumber = phone;
 		  if(carrier.equals("Verizon")) phoneNumber += "@vtext.com";
 		  else if(carrier.equals("AT&T")) phoneNumber += "@txt.att.net";
